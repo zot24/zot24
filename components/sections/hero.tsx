@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { SocialLinks } from '@/components/social-links';
+import { HyperText } from '@/components/ui/hyper-text';
 
 export function Hero() {
   return (
@@ -25,9 +26,12 @@ export function Hero() {
               <h2 className="text-xl font-medium text-primary tracking-wide uppercase">
                 Engineering Leader
               </h2>
-              <h1 className="text-5xl lg:text-7xl font-heading font-bold tracking-tight text-foreground leading-[1.1]">
-                Israel <span className="text-muted-foreground">Soto</span>
-              </h1>
+              <div className="flex justify-center lg:justify-start">
+                <HyperText
+                  text="zot24"
+                  className="text-5xl lg:text-7xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-500"
+                />
+              </div>
               <p className="text-xl lg:text-2xl text-muted-foreground max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
                 Building world-class engineering teams and scalable cloud infrastructure. Founder of <span className="text-foreground font-medium">roadmap.sh</span>.
               </p>
@@ -57,7 +61,7 @@ export function Hero() {
               <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-card">
                 <Image
                   src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d"
-                  alt="Israel Soto Profile"
+                  alt="zot24 Profile"
                   fill
                   className="object-cover"
                   priority
