@@ -11,6 +11,8 @@ export interface BlogPost {
     description: string;
     content: string;
     tags?: string[];
+    externalLink?: string;
+    platform?: string;
 }
 
 export function getAllPosts(): BlogPost[] {
@@ -34,7 +36,7 @@ export function getAllPosts(): BlogPost[] {
         return {
             slug,
             content,
-            ...(data as { title: string; date: string; description: string; tags?: string[] }),
+            ...(data as { title: string; date: string; description: string; tags?: string[]; externalLink?: string; platform?: string }),
         };
     });
 
@@ -57,7 +59,7 @@ export function getPostBySlug(slug: string): BlogPost | null {
         return {
             slug,
             content,
-            ...(data as { title: string; date: string; description: string; tags?: string[] }),
+            ...(data as { title: string; date: string; description: string; tags?: string[]; externalLink?: string; platform?: string }),
         };
     } catch (e) {
         return null;
