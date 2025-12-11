@@ -25,30 +25,20 @@ interface Experience {
   testimonials?: Testimonial[];
 }
 
+import profileData from '@/content/profile.json';
+
 export function Experience() {
-  const experiences: Experience[] = [
-    {
-      location: "England, UK",
-      period: "Dec 2021 — Present",
-      title: "Head of Engineering",
-      company: "Insight Partners",
-      tag: "via acquisition",
-      description: "Insight Partners is a leading global venture capital firm investing in high-growth technology and software companies.",
-      details: "Joined following the acquisition of roadmap.sh (founded 2017). Currently leading product development, engineering strategy, and growth initiatives.",
-      technologies: [
-        "TypeScript", "React.js", "Node.js", "Astro", "Tailwind", "AWS", "Terraform", "Docker", "CI/CD"
-      ],
-      testimonials: [
-        {
-          name: "Sarah Johnson",
-          role: "Product Manager",
-          company: "Insight Partners",
-          image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
-          text: "An exceptional leader who combines technical expertise with strategic thinking. Their ability to navigate complex challenges while maintaining team morale is remarkable."
-        }
-      ]
-    }
-  ];
+  const experiences: Experience[] = (profileData.experience || []).map(exp => ({
+    location: "Remote / Global",
+    period: exp.period,
+    title: exp.title,
+    company: exp.company,
+    tag: "", // Default or logic to map if available
+    description: exp.description,
+    details: "", // Simple mapping for now
+    technologies: [], // Needs enrichment or schema update
+    testimonials: []
+  }));
 
   return (
     <section id="work" className="relative py-24 overflow-hidden">

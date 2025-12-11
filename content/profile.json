@@ -1,0 +1,19 @@
+{
+    "name": "zot24",
+    "headline": "Engineering Leader | Founder of roadmap.sh",
+    "summary": "Building world-class engineering teams and scalable cloud infrastructure. Founder of roadmap.sh. Correctly responsible for all aspects of product development including engineering, content, marketing and growth at Insight Partners.",
+    "experience": [
+        {
+            "title": "Founder",
+            "company": "roadmap.sh",
+            "period": "2018 - Present",
+            "description": "Building the most popular roadmap for developers."
+        },
+        {
+            "title": "Engineering Lead",
+            "company": "Insight Partners",
+            "period": "2020 - Present",
+            "description": "Leading engineering initiatives and technical due diligence."
+        }
+    ]
+}

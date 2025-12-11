@@ -7,27 +7,53 @@ import { Home, Briefcase, MessageCircle, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export function NavigationMenu() {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
+  const [isInitial, setIsInitial] = useState(true);
+
+  const [hasHiddenOnce, setHasHiddenOnce] = useState(false);
+
+  // Handle initial visibility
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsInitial(false);
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       // Show if mouse is within top 100px
-      setIsVisible(e.clientY <= 100);
+      setIsHovering(e.clientY <= 100);
     };
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
+  const isVisible = isInitial || isHovering;
+
+  const navVariants = {
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { type: "spring", stiffness: 260, damping: 20 }
+    },
+    hidden: {
+      y: -100,
+      opacity: 0,
+      transition: hasHiddenOnce ? { type: "spring", stiffness: 260, damping: 20 } : { duration: 2, ease: "easeInOut" }
+    }
+  };
+
   return (
-    <AnimatePresence>
+    <AnimatePresence onExitComplete={() => setHasHiddenOnce(true)}>
       {isVisible && (
         <motion.nav
           className="fixed top-6 left-0 right-0 z-50 flex justify-center pointer-events-none"
-          initial={{ y: -100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: -100, opacity: 0 }}
-          transition={{ type: "spring", stiffness: 260, damping: 20 }}
+          initial="hidden"
+          animate="visible"
+          exit="hidden"
+          variants={navVariants}
         >
           <div className="bg-black/20 backdrop-blur-md border border-white/10 shadow-2xl rounded-full px-6 py-2 pointer-events-auto">
             <div className="flex items-center gap-2">

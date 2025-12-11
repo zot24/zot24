@@ -28,11 +28,11 @@ export function HyperText({
 }: HyperTextProps) {
     const [displayText, setDisplayText] = useState(text.split(""));
     const [trigger, setTrigger] = useState(false);
-    const interations = useRef(0);
+    const interations = useRef(-1);
     const isFirstRender = useRef(true);
 
     const triggerAnimation = () => {
-        interations.current = 0;
+        interations.current = -1;
         setTrigger(true);
     };
 

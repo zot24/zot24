@@ -7,7 +7,7 @@ import { HyperText } from '@/components/ui/hyper-text';
 
 export function Hero() {
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden py-20 lg:py-0">
+    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-32 pb-20 lg:py-0">
       {/* Background Gradients */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-pulse" />
@@ -60,7 +60,7 @@ export function Hero() {
 
               <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-card">
                 <Image
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d"
+                  src="/images/profile.jpg"
                   alt="zot24 Profile"
                   fill
                   className="object-cover"
