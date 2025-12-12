@@ -1,0 +1,44 @@
+[
+    {
+        "name": "Tom Holder",
+        "role": "Chief Executive Officer",
+        "company": "Contactzilla",
+        "text": "I worked with Israel for a couple of years on our SaaS product ContactZilla. Working with Israel was a delight. He's an enthusiastic, smart and considered character with a real ability to learn knew technologies. He's never phased by a challenge and approaches everything with a professional manner and importantly with good humour. I'd definitely not hesitate to work with Israel again.",
+        "date": "2022-10-17"
+    },
+    {
+        "name": "Richard Sposato",
+        "role": "Development Team Lead",
+        "company": "Bio-Rad Laboratories",
+        "text": "I managed Israel while we both worked on the Platform Infrastructure team at Anaplan. While working with him, I quickly learned he was a capable addition to our team. He was professional in communicating with others, competent in getting his work done well and on time, and a team player who worked well with everyone. [...] His hard work and technical skills helped us complete the Lion project on time. [...] He has my full confidence.",
+        "date": "2022-08-23"
+    },
+    {
+        "name": "Jason Rosendale",
+        "role": "Software Engineer",
+        "company": "Discord",
+        "text": "It's difficult to write a recommendation that does service to Israel's level of expertise or the importance that his work has made to the engineering team at Entelo. [...] The engineering team relies heavily on him (he knows our infrastructure inside and out, he built our deployment pipeline, he set up our metrics and logging systems); but at the same time he has made sure that the engineering team does not need to rely on him [...] He prevents engineers from having to spend their time dealing with infrastructure [...] I could not do my job effectively without Israel's help.",
+        "date": "2019-07-31"
+    },
+    {
+        "name": "Fay Gadsby",
+        "role": "Project Manager",
+        "company": "Enterprise",
+        "text": "Israel was an immeasurable help to our team and made a great impact in the short time he was with us. Friendly, organised and attentive, with a sunny disposition, he is everything you need in a team member - more so with a close-knit team like ours. Israel was very efficient with his work, with excellent attention to detail and kindly went above the call of duty on many occasions. His knowledge and skill set was spot on for our clients and they appreciated the speed and quality of his work throughout.",
+        "date": "2014-08-21"
+    },
+    {
+        "name": "Mark Mikkelson",
+        "role": "Co-Founder",
+        "company": "Shiptheory",
+        "text": "Israel is a hardworking knowledgeable guy. He always seems up-to-date with the new trends and technologies and is versatile in a number of languages and environments.",
+        "date": "2014-06-23"
+    },
+    {
+        "name": "Adolfo Perez",
+        "role": "Staff Software Engineer & Team Lead",
+        "company": "Liferay",
+        "text": "Israel is an excellent professional, passionate about technology and always looking for better ways of doing things. He has the ability to work both as part of a team or as an individual, and is able to learn new things very quickly. He is also an overall nice guy :-)",
+        "date": "2013-05-14"
+    }
+]

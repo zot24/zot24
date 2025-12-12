@@ -4,6 +4,11 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { SocialLinks } from '@/components/social-links';
 import { HyperText } from '@/components/ui/hyper-text';
+import { Badge } from '@/components/ui/badge';
+
+const coreSkills = [
+  "Kubernetes", "Terraform", "AWS", "GCP", "Azure", "Go", "Platform Engineering"
+];
 
 export function Hero() {
   return (
@@ -33,18 +38,25 @@ export function Hero() {
                 />
               </div>
               <p className="text-xl lg:text-2xl text-muted-foreground max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
-                Building world-class engineering teams and scalable cloud infrastructure. Founder of <span className="text-foreground font-medium">roadmap.sh</span>.
+                15+ years building <span className="text-foreground font-medium">world-class engineering teams</span> and <span className="text-foreground font-medium">scalable cloud infrastructure</span> at companies like BlackRock, Anaplan, and Entelo.
               </p>
+            </div>
+
+            {/* Skills integrated into hero */}
+            <div className="flex flex-wrap justify-center lg:justify-start gap-2">
+              {coreSkills.map((skill) => (
+                <Badge
+                  key={skill}
+                  variant="secondary"
+                  className="px-3 py-1 text-xs bg-white/5 border border-white/10 hover:border-primary/30 transition-colors"
+                >
+                  {skill}
+                </Badge>
+              ))}
             </div>
 
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
               <SocialLinks />
-            </div>
-
-            <div className="pt-8 border-t border-border/50 max-w-xl mx-auto lg:mx-0">
-              <p className="text-sm text-muted-foreground/80">
-                Correctly responsible for all aspects of product development including engineering, content, marketing and growth at Insight Partners.
-              </p>
             </div>
           </motion.div>
 

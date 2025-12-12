@@ -29,7 +29,7 @@ const socialLinks = [
   {
     name: 'Email',
     icon: Mail,
-    href: 'mailto:sotoisra24@gmail.com',
+    href: 'mailto:hi@zot24.com',
     color: 'hover:text-primary',
     bgColor: 'hover:bg-primary/10',
   },

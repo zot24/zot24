@@ -3,13 +3,14 @@
 import { motion } from 'framer-motion';
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import { Quote, User } from 'lucide-react';
 import Image from 'next/image';
 
 interface Testimonial {
   name: string;
   role: string;
-  company: string;
-  image: string;
+  company?: string;
+  image?: string;
   text: string;
 }
 
@@ -19,8 +20,7 @@ interface Experience {
   title: string;
   company: string;
   tag?: string;
-  description: string;
-  details: string;
+  highlights: string[];
   technologies: string[];
   testimonials?: Testimonial[];
 }
@@ -28,16 +28,21 @@ interface Experience {
 import profileData from '@/content/profile.json';
 
 export function Experience() {
-  const experiences: Experience[] = (profileData.experience || []).map(exp => ({
-    location: "Remote / Global",
+  const experiences: Experience[] = (profileData.experience || []).map((exp: any) => ({
+    location: exp.location || "Remote / Global",
     period: exp.period,
     title: exp.title,
     company: exp.company,
-    tag: "", // Default or logic to map if available
-    description: exp.description,
-    details: "", // Simple mapping for now
-    technologies: [], // Needs enrichment or schema update
-    testimonials: []
+    tag: "",
+    highlights: exp.highlights || [],
+    technologies: exp.technologies || [],
+    testimonials: exp.testimonials ? exp.testimonials.map((t: any) => ({
+      name: t.name,
+      role: t.role,
+      company: exp.company,
+      image: t.image,
+      text: t.text
+    })) : []
   }));
 
   return (
@@ -59,7 +64,7 @@ export function Experience() {
           </p>
         </motion.div>
 
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-5xl mx-auto space-y-6">
           {experiences.map((experience, index) => (
             <motion.div
               key={index}
@@ -72,7 +77,7 @@ export function Experience() {
                 {/* Hover Glow */}
                 <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-                <div className="grid gap-10 lg:grid-cols-[1.5fr,1fr] relative z-10">
+                <div className={`relative z-10 ${experience.testimonials && experience.testimonials.length > 0 ? 'grid gap-10 lg:grid-cols-[1.5fr,1fr]' : ''}`}>
                   <div className="space-y-6">
                     <div className="space-y-2">
                       <div className="flex flex-wrap justify-between items-baseline gap-2">
@@ -81,53 +86,66 @@ export function Experience() {
                       </div>
 
                       <div className="space-y-1">
-                        <h3 className="text-3xl font-heading font-bold leading-tight">{experience.title}</h3>
+                        <h3 className="text-2xl md:text-3xl font-heading font-bold leading-tight">{experience.title}</h3>
                         <div className="flex items-center gap-2 text-lg text-muted-foreground">
                           <span>at</span>
                           <span className="font-medium text-foreground">{experience.company}</span>
-                          {experience.tag && (
-                            <Badge variant="secondary" className="bg-primary/10 text-primary hover:bg-primary/20 border-primary/20 text-xs ml-2">
-                              {experience.tag}
-                            </Badge>
-                          )}
                         </div>
                       </div>
                     </div>
 
-                    <div className="space-y-4 text-base leading-relaxed text-muted-foreground/90">
-                      <p>{experience.description}</p>
-                      <p>{experience.details}</p>
-                    </div>
+                    {/* Bullet point highlights */}
+                    {experience.highlights.length > 0 && (
+                      <ul className="space-y-3">
+                        {experience.highlights.map((highlight, hIndex) => (
+                          <li key={hIndex} className="flex gap-3 text-muted-foreground/90">
+                            <span className="text-primary mt-1.5 flex-shrink-0">•</span>
+                            <span className="leading-relaxed">{highlight}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
 
-                    <div className="flex flex-wrap gap-2 pt-4">
-                      {experience.technologies.map((tech, techIndex) => (
-                        <Badge key={techIndex} variant="outline" className="border-white/10 bg-white/5 hover:bg-white/10 transition-colors">
-                          {tech}
-                        </Badge>
-                      ))}
-                    </div>
+                    {experience.technologies.length > 0 && (
+                      <div className="flex flex-wrap gap-2 pt-2">
+                        {experience.technologies.map((tech, techIndex) => (
+                          <Badge key={techIndex} variant="outline" className="border-white/10 bg-white/5 hover:bg-white/10 transition-colors text-xs">
+                            {tech}
+                          </Badge>
+                        ))}
+                      </div>
+                    )}
                   </div>
 
-                  {experience.testimonials && (
+                  {experience.testimonials && experience.testimonials.length > 0 && (
                     <div className="relative pl-0 lg:pl-10 lg:border-l border-white/10 space-y-6">
-                      <h4 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">Colleague Reviews</h4>
+                      <div className="flex items-center gap-2 mb-4">
+                        <Quote className="w-5 h-5 text-primary/60" />
+                        <h4 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">Review</h4>
+                      </div>
                       <div className="space-y-6">
                         {experience.testimonials.map((testimonial, tIndex) => (
-                          <div key={tIndex} className="p-5 rounded-xl bg-white/5 border border-white/5">
+                          <div key={tIndex} className="p-5 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
                             <p className="text-muted-foreground italic text-sm mb-4 leading-relaxed">"{testimonial.text}"</p>
                             <div className="flex items-center gap-3">
-                              <div className="relative w-10 h-10 rounded-full overflow-hidden border border-white/10">
-                                <Image
-                                  src={testimonial.image}
-                                  alt={testimonial.name}
-                                  fill
-                                  className="object-cover"
-                                />
-                              </div>
+                              {testimonial.image ? (
+                                <div className="relative w-10 h-10 rounded-full overflow-hidden border border-white/10">
+                                  <Image
+                                    src={testimonial.image}
+                                    alt={testimonial.name}
+                                    fill
+                                    className="object-cover"
+                                  />
+                                </div>
+                              ) : (
+                                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 border border-primary/20 text-primary">
+                                  <User className="w-5 h-5" />
+                                </div>
+                              )}
                               <div>
                                 <p className="text-sm font-semibold text-foreground">{testimonial.name}</p>
                                 <p className="text-xs text-muted-foreground">
-                                  {testimonial.role}, {testimonial.company}
+                                  {testimonial.role}
                                 </p>
                               </div>
                             </div>
