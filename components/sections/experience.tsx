@@ -46,7 +46,7 @@ export function Experience() {
   }));
 
   return (
-    <section id="work" className="relative py-24 overflow-hidden">
+    <section id="work" className="relative pt-24 pb-32 overflow-hidden">
       {/* Dynamic Background */}
       <div className="absolute inset-0 bg-background/50" />
       <div className="absolute top-1/4 -right-64 w-96 h-96 bg-primary/10 rounded-full blur-3xl opacity-50 pointer-events-none" />

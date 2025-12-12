@@ -29,7 +29,7 @@ export function Hero() {
           >
             <div className="space-y-4">
               <h2 className="text-xl font-medium text-primary tracking-wide uppercase">
-                Engineering Leader
+                Founder, Builder & Engineer
               </h2>
               <div className="flex justify-center lg:justify-start">
                 <HyperText
@@ -37,9 +37,14 @@ export function Hero() {
                   className="text-5xl lg:text-7xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-500"
                 />
               </div>
-              <p className="text-xl lg:text-2xl text-muted-foreground max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
-                15+ years building <span className="text-foreground font-medium">world-class engineering teams</span> and <span className="text-foreground font-medium">scalable cloud infrastructure</span> at companies like BlackRock, Anaplan, and Entelo.
-              </p>
+              <div className="space-y-3 max-w-2xl mx-auto lg:mx-0">
+                <p className="text-xl lg:text-2xl text-muted-foreground font-light leading-relaxed">
+                  15+ years building <span className="text-foreground font-medium">cloud platforms</span> and <span className="text-foreground font-medium">scalable infrastructure</span> at companies like BlackRock, Anaplan, and Entelo.
+                </p>
+                <p className="text-lg text-muted-foreground/80 font-light leading-relaxed">
+                  Entrepreneur and seed investor. Currently based in <span className="text-foreground font-medium">Paraguay</span> after years of traveling across the globe.
+                </p>
+              </div>
             </div>
 
             {/* Skills integrated into hero */}

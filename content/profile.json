@@ -34,7 +34,7 @@
             "title": "Senior Cloud Engineer",
             "company": "BlackRock",
             "period": "Feb 2023 - Jan 2025",
-            "location": "Remote",
+            "location": "San Francisco Bay Area",
             "highlights": [
                 "Designed Chaos Engineering scenarios with LitmusChaos, increasing test coverage by 30%",
                 "Enhanced observability with new monitoring cases and optimized dashboards",
@@ -172,21 +172,6 @@
                     "role": "Chief Executive Officer",
                     "text": "I worked with Israel for a couple of years on our SaaS product ContactZilla. Working with Israel was a delight. He's an enthusiastic, smart and considered character with a real ability to learn knew technologies. He's never phased by a challenge and approaches everything with a professional manner and importantly with good humour. I'd definitely not hesitate to work with Israel again."
                 }
-            ]
-        },
-        {
-            "title": "Systems Analyst / Web Developer",
-            "company": "Fanatic Design Limited",
-            "period": "Jul 2014 - Aug 2014",
-            "location": "Bristol, UK",
-            "highlights": [
-                "Freelance web development using PHP frameworks (Concrete5, Yii)",
-                "Technical consulting on infrastructure and technology strategy"
-            ],
-            "technologies": [
-                "PHP",
-                "Concrete5",
-                "Yii"
             ]
         },
         {
