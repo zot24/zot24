@@ -39,10 +39,10 @@ export function Hero() {
               </div>
               <div className="space-y-3 max-w-2xl mx-auto lg:mx-0">
                 <p className="text-xl lg:text-2xl text-muted-foreground font-light leading-relaxed">
-                  23 years building <span className="text-foreground font-medium">cloud platforms</span> and <span className="text-foreground font-medium">scalable infrastructure</span> at companies like BlackRock, Anaplan, and Entelo.
+                  +13 years building <span className="text-foreground font-medium">cloud platforms</span> and <span className="text-foreground font-medium">scalable infrastructure</span> at companies like BlackRock, Anaplan, and Entelo.
                 </p>
                 <p className="text-lg text-muted-foreground/80 font-light leading-relaxed">
-                  Entrepreneur and seed investor. Currently based in <span className="text-foreground font-medium">Paraguay</span> after years of traveling across the globe.
+                  Entrepreneur and seed investor. Currently based in <span className="text-foreground font-medium">Asuncion, Paraguay</span> after years of traveling across the globe.
                 </p>
               </div>
             </div>
