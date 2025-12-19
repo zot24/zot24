@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Twitter, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { trackSocialClick, type SocialClickData } from '@/lib/analytics';
 
 const socialLinks = [
   {
@@ -11,6 +12,7 @@ const socialLinks = [
     href: 'https://github.com/zot24',
     color: 'hover:text-[#333]',
     bgColor: 'hover:bg-[#333]/10',
+    platform: 'github' as const,
   },
   {
     name: 'LinkedIn',
@@ -18,6 +20,7 @@ const socialLinks = [
     href: 'https://www.linkedin.com/in/zot24/',
     color: 'hover:text-[#0077B5]',
     bgColor: 'hover:bg-[#0077B5]/10',
+    platform: 'linkedin' as const,
   },
   {
     name: 'Twitter',
@@ -25,6 +28,7 @@ const socialLinks = [
     href: 'https://twitter.com/zot24',
     color: 'hover:text-[#1DA1F2]',
     bgColor: 'hover:bg-[#1DA1F2]/10',
+    platform: 'twitter' as const,
   },
   {
     name: 'Email',
@@ -32,6 +36,7 @@ const socialLinks = [
     href: 'mailto:hi@zot24.com',
     color: 'hover:text-primary',
     bgColor: 'hover:bg-primary/10',
+    platform: 'email' as const,
   },
 ];
 
@@ -54,6 +59,7 @@ export function SocialLinks() {
               href={link.href}
               target={link.name !== 'Email' ? '_blank' : undefined}
               rel={link.name !== 'Email' ? 'noopener noreferrer' : undefined}
+              onClick={() => trackSocialClick({ platform: link.platform, href: link.href })}
             >
               <link.icon className="w-5 h-5" />
               <span className="sr-only">{link.name}</span>

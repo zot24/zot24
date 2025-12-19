@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, BookOpen } from 'lucide-react';
 import { format } from 'date-fns';
 import type { BlogPost } from '@/lib/blog';
+import { trackArticleClick } from '@/lib/analytics';
 
 interface WritingProps {
     posts: BlogPost[];
@@ -101,11 +102,21 @@ export function Writing({ posts }: WritingProps) {
                                 transition={{ delay: index * 0.1 }}
                             >
                                 {isExternal ? (
-                                    <a href={href} target="_blank" rel="noopener noreferrer" className="block h-full">
+                                    <a
+                                        href={href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="block h-full"
+                                        onClick={() => trackArticleClick({ title: post.title, slug: post.slug, isExternal: true, platform: post.platform })}
+                                    >
                                         {CardContent}
                                     </a>
                                 ) : (
-                                    <Link href={href} className="block h-full">
+                                    <Link
+                                        href={href}
+                                        className="block h-full"
+                                        onClick={() => trackArticleClick({ title: post.title, slug: post.slug, isExternal: false })}
+                                    >
                                         {CardContent}
                                     </Link>
                                 )}

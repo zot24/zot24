@@ -20,7 +20,7 @@ export function Hero() {
       </div>
 
       <div className="container relative z-10 px-4 mx-auto">
-        <div className="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-24">
+        <div className="flex flex-col-reverse lg:flex-row items-center justify-center gap-12 lg:gap-20 max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -39,7 +39,7 @@ export function Hero() {
               </div>
               <div className="space-y-3 max-w-2xl mx-auto lg:mx-0">
                 <p className="text-xl lg:text-2xl text-muted-foreground font-light leading-relaxed">
-                  15+ years building <span className="text-foreground font-medium">cloud platforms</span> and <span className="text-foreground font-medium">scalable infrastructure</span> at companies like BlackRock, Anaplan, and Entelo.
+                  23 years building <span className="text-foreground font-medium">cloud platforms</span> and <span className="text-foreground font-medium">scalable infrastructure</span> at companies like BlackRock, Anaplan, and Entelo.
                 </p>
                 <p className="text-lg text-muted-foreground/80 font-light leading-relaxed">
                   Entrepreneur and seed investor. Currently based in <span className="text-foreground font-medium">Paraguay</span> after years of traveling across the globe.

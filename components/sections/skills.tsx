@@ -18,7 +18,7 @@ export function Skills() {
                 >
                     <h2 className="text-3xl md:text-4xl font-heading font-bold tracking-tight">Technical Expertise</h2>
                     <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                        A comprehensive toolbelt built over 15+ years of engineering leadership and development.
+                        A comprehensive toolbelt built over 23 years of engineering leadership and development.
                     </p>
                 </motion.div>
 

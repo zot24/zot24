@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter, Outfit } from 'next/font/google';
+import Script from 'next/script';
 import { Providers } from './providers';
 import { NavigationMenu } from '@/components/navigation-menu';
 
@@ -24,6 +25,11 @@ export default function RootLayout({
           <NavigationMenu />
           {children}
         </Providers>
+        <Script
+          src="https://umami.motty.io/script.js"
+          data-website-id="c9e30775-03c2-4b26-bdbd-90006ac86727"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
