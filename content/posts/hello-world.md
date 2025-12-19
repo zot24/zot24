@@ -1,6 +1,6 @@
 ---
 title: "Hello World"
-date: "2024-03-20"
+date: "2025-12-12"
 description: "Welcome to my new blog space where I'll share thoughts on engineering, leadership, entrepreneurship, sovereignty, tech and traveling."
 tags: ["general", "intro"]
 ---
