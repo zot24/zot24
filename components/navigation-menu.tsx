@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Home, Briefcase, MessageCircle, BookOpen } from 'lucide-react';
+import { Home, Briefcase, MessageCircle, BookOpen, Wrench } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { trackNavClick, type NavClickData } from '@/lib/analytics';
 
@@ -15,6 +15,7 @@ const navItems: Array<{
 }> = [
   { href: '/', icon: Home, label: 'Home', destination: 'home' },
   { href: '/#work', icon: Briefcase, label: 'Work', destination: 'work' },
+  { href: '/#projects', icon: Wrench, label: 'Projects', destination: 'projects' },
   { href: '/blog', icon: BookOpen, label: 'Writing', destination: 'writing' },
   { href: '/#contact', icon: MessageCircle, label: 'Contact', destination: 'contact' },
 ];

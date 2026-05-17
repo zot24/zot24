@@ -20,7 +20,7 @@ export interface SocialClickData {
 }
 
 export interface NavClickData {
-  destination: 'home' | 'work' | 'writing' | 'contact';
+  destination: 'home' | 'work' | 'projects' | 'writing' | 'contact';
   href: string;
 }
 

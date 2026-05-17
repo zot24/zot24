@@ -1,0 +1,15 @@
+{
+  "projects": [
+    {
+      "slug": "zskills",
+      "title": "zskills",
+      "tagline": "Package manager for agentic coding CLIs",
+      "description": "Declarative install, sync, and reconciliation of Claude Code plugins, Agent Skills, and MCP servers across user/project/local scopes via one skills.toml manifest. Treats settings.json and installed_plugins.json as state — the manifest as intent. Written in Rust.",
+      "url": "https://zskills.zot24.com",
+      "github": "https://github.com/zot24/zskills",
+      "tags": ["Rust", "CLI", "Claude Code", "MCP", "Agent Skills"],
+      "status": "active",
+      "highlight": true
+    }
+  ]
+}
