@@ -11,33 +11,44 @@ export default function Home() {
   const projects = getAllProjects();
 
   return (
-    <main className="min-h-screen">
-      <div className="relative">
-        <Hero />
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent to-muted/50" />
-      </div>
-
-      <div className="relative bg-muted/50">
-        <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-background to-transparent" />
-        <Experience />
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-muted/50 to-background" />
-      </div>
-
-      <div className="relative">
-        <Projects projects={projects} />
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent to-muted/50" />
-      </div>
-
-      <div className="relative bg-muted/50">
-        <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-background to-transparent" />
-        <Writing posts={posts} />
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-muted/50 to-background" />
-      </div>
-
-      <div className="relative">
-        <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-muted/50 to-transparent" />
-        <Contact />
-      </div>
+    <main>
+      <Hero />
+      <SectionDivider label="work" />
+      <Experience />
+      <SectionDivider label="projects" />
+      <Projects projects={projects} />
+      <SectionDivider label="writing" />
+      <Writing posts={posts} />
+      <SectionDivider label="contact" />
+      <Contact />
+      <Footer />
     </main>
+  );
+}
+
+function SectionDivider({ label }: { label: string }) {
+  return (
+    <div
+      aria-hidden="true"
+      className="max-w-5xl mx-auto px-6 md:px-10 dimmer text-[0.7rem] uppercase tracking-widest select-none"
+    >
+      <pre className="m-0 leading-tight">{`╌╌╌╌ /${label} ╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌`}</pre>
+    </div>
+  );
+}
+
+function Footer() {
+  const year = new Date().getFullYear();
+  return (
+    <footer className="max-w-5xl mx-auto px-6 md:px-10 py-12 dim text-xs">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <span>
+          ─── eof ─── <span className="dimmer">© {year} zot24</span>
+        </span>
+        <span className="dimmer">
+          set in jetbrains mono &amp; ibm plex serif · built on next.js
+        </span>
+      </div>
+    </footer>
   );
 }

@@ -1,38 +1,98 @@
+import Link from 'next/link';
+import { format } from 'date-fns';
 import { getAllPosts } from '@/lib/blog';
-import { BookOpen } from 'lucide-react';
-import { BlogCard } from '@/components/blog-card';
 
 export const metadata = {
-    title: 'Writing - zot24',
-    description: 'Thoughts on engineering, leadership, and technology.',
+  title: 'writing — zot24',
+  description:
+    'Thoughts on engineering, leadership, and the systems underneath them.',
 };
 
 export default function BlogPage() {
-    const posts = getAllPosts();
+  const posts = getAllPosts();
 
-    return (
-        <main className="min-h-screen pt-32 pb-24 px-4 bg-background">
-            <div className="container mx-auto max-w-4xl space-y-12">
-                <div className="text-center space-y-4">
-                    <h1 className="text-4xl lg:text-5xl font-heading font-bold">Writing</h1>
-                    <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                        Thoughts, tutorials, and insights on software engineering and leadership.
-                    </p>
-                </div>
+  return (
+    <main className="max-w-5xl mx-auto px-6 md:px-10 pt-14 md:pt-20 pb-24">
+      <div className="t-stagger">
+        <div className="mb-10">
+          <div className="text-sm md:text-base mb-2">
+            <span className="dimmer">$</span>{' '}
+            <span className="accent">writing</span>{' '}
+            <span className="dim">cat ./posts/*.md | head</span>
+            <span className="t-cursor" />
+          </div>
+          <h1 className="text-3xl md:text-4xl font-medium">
+            writing.
+          </h1>
+          <p className="dim mt-2 text-sm max-w-xl pretty">
+            Thoughts on engineering, leadership, and the platforms underneath them.
+          </p>
+        </div>
 
-                <div className="grid gap-6">
-                    {posts.length > 0 ? (
-                        posts.map((post) => (
-                            <BlogCard key={post.slug} post={post} />
-                        ))
-                    ) : (
-                        <div className="text-center py-20 text-muted-foreground">
-                            <BookOpen className="w-12 h-12 mx-auto mb-4 opacity-20" />
-                            <p>No posts found. Coming soon!</p>
-                        </div>
-                    )}
+        {posts.length === 0 ? (
+          <div className="t-card p-8 text-center dim text-sm">
+            <span className="dimmer">→</span> no posts yet. coming soon.
+          </div>
+        ) : (
+          <ul className="divide-y divide-[color:var(--t-bg-rule)] border-y border-[color:var(--t-bg-rule)]">
+            {posts.map((post) => {
+              const isExternal = !!post.externalLink;
+              const href = post.externalLink || `/blog/${post.slug}`;
+              const dateStr = format(new Date(post.date), 'yyyy-MM-dd');
+
+              const inner = (
+                <div className="group relative py-5 px-2 md:px-4 -mx-2 md:-mx-4 hover:bg-[color:var(--t-accent-soft)] transition-colors">
+                  <div className="grid grid-cols-12 gap-4 items-baseline">
+                    <time
+                      dateTime={post.date}
+                      className="col-span-12 md:col-span-2 text-[0.72rem] uppercase tracking-widest dim num-tab"
+                    >
+                      {dateStr}
+                    </time>
+                    <div className="col-span-12 md:col-span-8 space-y-1">
+                      <h2 className="text-base md:text-lg group-hover:text-[color:var(--t-accent)] transition-colors">
+                        {post.title}
+                        {isExternal && (
+                          <span className="dim ml-2 text-xs">↗</span>
+                        )}
+                      </h2>
+                      {post.description && (
+                        <p className="dim text-sm leading-relaxed pretty">
+                          {post.description}
+                        </p>
+                      )}
+                    </div>
+                    <div className="col-span-12 md:col-span-2 md:text-right text-[0.7rem] uppercase tracking-widest dimmer">
+                      {post.platform === 'X'
+                        ? 'thread'
+                        : post.tags?.[0] ?? '—'}
+                    </div>
+                  </div>
                 </div>
-            </div>
-        </main>
-    );
+              );
+
+              return (
+                <li key={post.slug}>
+                  {isExternal ? (
+                    <a
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block"
+                    >
+                      {inner}
+                    </a>
+                  ) : (
+                    <Link href={href} className="block">
+                      {inner}
+                    </Link>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        )}
+      </div>
+    </main>
+  );
 }

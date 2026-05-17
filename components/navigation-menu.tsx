@@ -1,98 +1,159 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Home, Briefcase, MessageCircle, BookOpen, Wrench } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { trackNavClick, type NavClickData } from '@/lib/analytics';
+
+type SectionId = 'home' | 'work' | 'projects' | 'writing' | 'contact';
 
 const navItems: Array<{
   href: string;
-  icon: typeof Home;
   label: string;
   destination: NavClickData['destination'];
+  section: SectionId;
 }> = [
-  { href: '/', icon: Home, label: 'Home', destination: 'home' },
-  { href: '/#work', icon: Briefcase, label: 'Work', destination: 'work' },
-  { href: '/#projects', icon: Wrench, label: 'Projects', destination: 'projects' },
-  { href: '/blog', icon: BookOpen, label: 'Writing', destination: 'writing' },
-  { href: '/#contact', icon: MessageCircle, label: 'Contact', destination: 'contact' },
+  { href: '/', label: 'home', destination: 'home', section: 'home' },
+  { href: '/#work', label: 'work', destination: 'work', section: 'work' },
+  { href: '/#projects', label: 'projects', destination: 'projects', section: 'projects' },
+  { href: '/blog', label: 'writing', destination: 'writing', section: 'writing' },
+  { href: '/#contact', label: 'contact', destination: 'contact', section: 'contact' },
 ];
 
-export function NavigationMenu() {
-  const [isHovering, setIsHovering] = useState(false);
-  const [isInitial, setIsInitial] = useState(true);
-
-  const [hasHiddenOnce, setHasHiddenOnce] = useState(false);
-
-  // Handle initial visibility
+function useClock() {
+  const [time, setTime] = useState<string>('');
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsInitial(false);
-    }, 5000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      // Show if mouse is within top 100px
-      setIsHovering(e.clientY <= 100);
+    const tick = () => {
+      const now = new Date();
+      const fmt = new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'America/Asuncion',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+      });
+      setTime(fmt.format(now));
     };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    tick();
+    const id = setInterval(tick, 30_000);
+    return () => clearInterval(id);
   }, []);
+  return time;
+}
 
-  const isVisible = isInitial || isHovering;
+/**
+ * Tracks which #section is currently in the viewport "active band"
+ * (the middle ~20% of the screen). Returns null when nothing matches
+ * or when we're not on a page that hosts the sections (e.g. /blog).
+ */
+function useActiveSection(enabled: boolean): SectionId | null {
+  const [active, setActive] = useState<SectionId | null>(null);
 
-  const navVariants = {
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: { type: "spring", stiffness: 260, damping: 20 }
-    },
-    hidden: {
-      y: -100,
-      opacity: 0,
-      transition: hasHiddenOnce ? { type: "spring", stiffness: 260, damping: 20 } : { duration: 2, ease: "easeInOut" }
+  useEffect(() => {
+    if (!enabled || typeof window === 'undefined') {
+      setActive(null);
+      return;
     }
-  };
+
+    const ids: SectionId[] = ['home', 'work', 'projects', 'writing', 'contact'];
+    const elements = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+
+    if (elements.length === 0) return;
+
+    // Track per-id intersection ratio; pick the highest each time anything changes.
+    const ratios = new Map<SectionId, number>();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          ratios.set(entry.target.id as SectionId, entry.intersectionRatio);
+        }
+        let best: SectionId | null = null;
+        let bestRatio = 0;
+        for (const id of ids) {
+          const r = ratios.get(id) ?? 0;
+          if (r > bestRatio) {
+            bestRatio = r;
+            best = id;
+          }
+        }
+        // If nothing is visibly intersecting (e.g., between sections during fast scroll),
+        // keep the previous active value rather than blanking out.
+        if (best) setActive(best);
+      },
+      {
+        // Active band = middle 30% of the viewport.
+        rootMargin: '-35% 0px -35% 0px',
+        threshold: [0, 0.25, 0.5, 0.75, 1],
+      }
+    );
+
+    elements.forEach((el) => observer.observe(el));
+
+    // Default to "home" when sitting at the top before any section trips the observer.
+    if (window.scrollY < 20) setActive('home');
+
+    return () => observer.disconnect();
+  }, [enabled]);
+
+  return active;
+}
+
+export function NavigationMenu() {
+  const pathname = usePathname();
+  const time = useClock();
+  const onHome = pathname === '/';
+  const activeSection = useActiveSection(onHome);
+
+  function isActive(href: string, section: SectionId): boolean {
+    // /blog and /blog/* always light up the writing item.
+    if (pathname.startsWith('/blog')) return section === 'writing';
+    if (onHome && activeSection) return section === activeSection;
+    // Fallback for any other route — light up the exact-match item if it exists.
+    return href === pathname;
+  }
 
   return (
-    <AnimatePresence onExitComplete={() => setHasHiddenOnce(true)}>
-      {isVisible && (
-        <motion.nav
-          className="fixed top-6 left-0 right-0 z-50 flex justify-center pointer-events-none"
-          initial="hidden"
-          animate="visible"
-          exit="hidden"
-          variants={navVariants}
-        >
-          <div className="bg-black/20 backdrop-blur-md border border-white/10 shadow-2xl rounded-full px-6 py-2 pointer-events-auto">
-            <div className="flex items-center gap-2">
-              {navItems.map((item) => (
-                <Button
-                  key={item.href}
-                  variant="ghost"
-                  size="sm"
-                  className="text-muted-foreground hover:text-foreground hover:bg-white/5 rounded-full px-4"
-                  asChild
-                >
-                  <Link
-                    href={item.href}
-                    className="flex items-center gap-2"
-                    onClick={() => trackNavClick({ destination: item.destination, href: item.href })}
-                  >
-                    <item.icon className="h-4 w-4" />
-                    <span className="font-medium">{item.label}</span>
-                  </Link>
-                </Button>
-              ))}
-            </div>
-          </div>
-        </motion.nav>
-      )}
-    </AnimatePresence>
+    <header className="sticky top-0 z-50 backdrop-blur-sm bg-[color:var(--t-bg)]/85 border-b border-[color:var(--t-bg-rule)]">
+      <div className="max-w-5xl mx-auto px-6 md:px-10 h-11 flex items-center justify-between text-[0.72rem] uppercase tracking-widest">
+        <div className="flex items-center gap-3 dim">
+          <span className="inline-block w-1.5 h-1.5 rounded-full bg-[color:var(--t-accent)] t-pulse" />
+          <span className="text-[color:var(--t-fg)]">zot24@asuncion</span>
+          <span className="dimmer">·</span>
+          <span className="num-tab tabular-nums">{time || '--:--'}</span>
+          <span className="dimmer hidden md:inline">·</span>
+          <span className="dimmer hidden md:inline">GMT-3</span>
+        </div>
+
+        <nav className="flex items-center gap-1 md:gap-2">
+          {navItems.map((item) => {
+            const active = isActive(item.href, item.section);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() =>
+                  trackNavClick({ destination: item.destination, href: item.href })
+                }
+                aria-current={active ? 'true' : undefined}
+                className={`t-press relative px-2 md:px-3 py-2 transition-colors ${
+                  active
+                    ? 'text-[color:var(--t-accent)]'
+                    : 'dim hover:text-[color:var(--t-fg)]'
+                }`}
+              >
+                {active && (
+                  <span className="dimmer mr-1" aria-hidden="true">
+                    {'>'}
+                  </span>
+                )}
+                {item.label}
+              </Link>
+            );
+          })}
+        </nav>
+      </div>
+    </header>
   );
 }
