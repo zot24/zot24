@@ -3,6 +3,7 @@ import { Experience } from '@/components/sections/experience';
 import { Projects } from '@/components/sections/projects';
 import { Writing } from '@/components/sections/writing';
 import { Contact } from '@/components/sections/contact';
+import { BootLoader } from '@/components/boot-loader';
 import { getAllPosts } from '@/lib/blog';
 import { getAllProjects } from '@/lib/projects';
 
@@ -12,6 +13,7 @@ export default function Home() {
 
   return (
     <main>
+      <BootLoader />
       <Hero />
       <SectionDivider label="work" />
       <Experience />

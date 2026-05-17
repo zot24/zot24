@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { JetBrains_Mono, IBM_Plex_Serif } from 'next/font/google';
 import Script from 'next/script';
 import { NavigationMenu } from '@/components/navigation-menu';
+import { NowStripe } from '@/components/now-stripe';
 
 const mono = JetBrains_Mono({
   subsets: ['latin'],
@@ -34,6 +35,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${mono.variable} ${serif.variable} t-crt relative`}>
         <NavigationMenu />
+        <NowStripe />
         {children}
         <Script
           src="https://umami.motty.io/script.js"

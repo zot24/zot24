@@ -53,9 +53,10 @@
     color-scheme: dark;
     background: var(--t-bg);
     /* Animate jump-to-section so scroll-spy can keep up.
-       Account for the sticky 44px nav so the heading isn't hidden under it. */
+       Account for the sticky 44px nav + 28px NOW stripe (72px total)
+       so anchored headings don't land hidden under them. */
     scroll-behavior: smooth;
-    scroll-padding-top: 4rem;
+    scroll-padding-top: 5rem;
   }
 
   @media (prefers-reduced-motion: reduce) {
