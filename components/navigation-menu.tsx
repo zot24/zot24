@@ -106,6 +106,11 @@ export function NavigationMenu() {
   const onHome = pathname === '/';
   const activeSection = useActiveSection(onHome);
 
+  // Preview variants that ship their own chrome — hide the global nav.
+  if (pathname === '/preview/split' || pathname === '/preview/panels') {
+    return null;
+  }
+
   function isActive(href: string, section: SectionId): boolean {
     // /blog and /blog/* always light up the writing item.
     if (pathname.startsWith('/blog')) return section === 'writing';
