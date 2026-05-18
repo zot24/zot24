@@ -25,6 +25,12 @@ const variants = [
     tagline:
       "Cold-boot animation on first visit; persistent 'now building' stripe across every page.",
   },
+  {
+    slug: 'frames',
+    name: 'Each section as its own terminal pane',
+    tagline:
+      'Every section wrapped in a window-frame with title bar (~/work, ~/projects, …) and active-pane dot. Stronger visual distinction between sections.',
+  },
 ];
 
 export default function PreviewIndex() {

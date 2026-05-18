@@ -150,6 +150,26 @@
   background: var(--t-accent-soft);
 }
 
+/*
+ * Row surface — for list-style items (writing posts, blog list).
+ * Same hover timing + bg as `.t-card`, plus a transparent left-edge that
+ * lights up to the accent on hover. Mirrors the visual logic of cards
+ * (border-becomes-accent) without imposing a full border on a list row.
+ *
+ * No content shift: the left-edge is always reserved (transparent by
+ * default) so hovering doesn't push text.
+ */
+.t-row {
+  border-left: 2px solid transparent;
+  transition-property: background-color, border-left-color;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+.t-row:hover {
+  background: var(--t-accent-soft);
+  border-left-color: var(--t-accent);
+}
+
 /* Inline mono tag pill */
 .t-tag {
   display: inline-block;
@@ -242,6 +262,49 @@
   transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
 }
 .t-press:active { transform: scale(0.96); }
+
+/*
+ * When a section is wrapped in a TerminalFrame, override its solo-mode
+ * padding/margins so the frame's chrome carries the visual weight. The
+ * inner section's `max-w-5xl mx-auto` is also collapsed since the frame
+ * already constrains width.
+ *
+ * Padding scale:
+ *   mobile  → 1rem  horizontal · 1.5rem vertical   (tight, phone-native)
+ *   md+     → 2rem  horizontal · 2.5rem vertical   (still cozy in a frame)
+ */
+.terminal-pane-body > section,
+.terminal-pane-body > main > section {
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding: 1.5rem 1rem !important;
+  scroll-margin-top: 6rem !important; /* matches frame's scroll-mt-24 anchor target */
+}
+
+@media (min-width: 768px) {
+  .terminal-pane-body > section,
+  .terminal-pane-body > main > section {
+    padding: 2.5rem 2rem !important;
+  }
+}
+
+/*
+ * Smooth minimize/expand for terminal panes. The CSS grid trick gives a
+ * height transition that handles dynamic content height without JS
+ * measurement. The inner `min-h-0` allows the row to collapse to 0fr.
+ */
+.terminal-pane-collapser {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows 220ms cubic-bezier(0.2, 0, 0, 1);
+}
+.terminal-pane-collapser[data-minimized='true'] {
+  grid-template-rows: 0fr;
+}
+.terminal-pane-collapser > .terminal-pane-body {
+  overflow: hidden;
+}
 
 /* ---- Markdown prose container — long-form readability ---- */
 

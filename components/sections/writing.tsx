@@ -38,7 +38,7 @@ export function Writing({ posts }: WritingProps) {
           const dateStr = format(new Date(post.date), 'yyyy-MM-dd');
 
           const inner = (
-            <div className="group relative py-5 px-2 md:px-4 -mx-2 md:-mx-4 hover:bg-[color:var(--t-accent-soft)] transition-colors">
+            <div className="t-row group relative py-5 px-3 md:px-5 -mx-2 md:-mx-4">
               <div className="grid grid-cols-12 gap-4 items-baseline">
                 <time
                   dateTime={post.date}

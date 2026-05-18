@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { trackNavClick, type NavClickData } from '@/lib/analytics';
+import { dispatchExpandPane } from '@/components/terminal-frame';
 
 type SectionId = 'home' | 'work' | 'projects' | 'writing' | 'contact';
 
@@ -134,13 +135,52 @@ export function NavigationMenu() {
         <nav className="flex items-center gap-1 md:gap-2">
           {navItems.map((item) => {
             const active = isActive(item.href, item.section);
+            const isInPageJump = onHome && item.href.startsWith('/#');
+            const isHomeFromHome = onHome && item.href === '/';
+
+            function handleClick(e: React.MouseEvent<HTMLAnchorElement>) {
+              trackNavClick({ destination: item.destination, href: item.href });
+
+              // Cross-page nav (e.g. clicking writing → /blog) keeps default behavior.
+              if (!onHome) return;
+
+              // In-page hash link: expand the target pane first, then scroll.
+              if (isInPageJump) {
+                e.preventDefault();
+                const targetId = item.href.slice(2); // strip "/#"
+                dispatchExpandPane(targetId);
+
+                // Give React a frame to commit the expand state change so
+                // the grid-row transition starts before the scroll begins;
+                // the smooth scroll then animates into a layout that's
+                // already growing toward its final size.
+                requestAnimationFrame(() => {
+                  document
+                    .getElementById(targetId)
+                    ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  if (typeof window !== 'undefined') {
+                    window.history.replaceState(null, '', item.href);
+                  }
+                });
+                return;
+              }
+
+              // Home from homepage: scroll to top and expand the hero pane.
+              if (isHomeFromHome) {
+                e.preventDefault();
+                dispatchExpandPane('home');
+                requestAnimationFrame(() => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                  window.history.replaceState(null, '', '/');
+                });
+              }
+            }
+
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                onClick={() =>
-                  trackNavClick({ destination: item.destination, href: item.href })
-                }
+                onClick={handleClick}
                 aria-current={active ? 'true' : undefined}
                 className={`t-press relative px-2 md:px-3 py-2 transition-colors ${
                   active
