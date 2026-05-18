@@ -1,9 +1,9 @@
 import { SocialLinks } from '@/components/social-links';
 
 const stats = [
-  { num: '23', label: 'years engineering' },
+  { num: '24', label: 'years engineering' },
   { num: '10+', label: 'cloud / infra' },
-  { num: '04', label: 'companies' },
+  { num: '12', label: 'companies' },
   { num: 'PY', label: 'currently based' },
 ];
 
@@ -51,7 +51,7 @@ export function Hero() {
             “I build the platforms that other platforms run on.”
           </p>
           <p className="mt-5 dim text-sm md:text-base max-w-2xl pretty leading-relaxed">
-            23 years writing software, the last decade designing cloud platforms and the
+            24 years writing software, the last decade designing cloud platforms and the
             scalable infrastructure underneath them. Now mostly head-down building the
             next ones myself.
           </p>

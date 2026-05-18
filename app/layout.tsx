@@ -23,7 +23,7 @@ const serif = IBM_Plex_Serif({
 export const metadata: Metadata = {
   title: 'zot24 — software engineer, founder, seed investor',
   description:
-    '23 years writing software, the last decade building cloud platforms. Currently in Asunción, Paraguay.',
+    '24 years writing software, the last decade building cloud platforms. Currently in Asunción, Paraguay.',
 };
 
 export default function RootLayout({

@@ -10,9 +10,9 @@ import { SocialLinks } from '@/components/social-links';
 import { getAllProjects } from '@/lib/projects';
 
 const stats = [
-  { num: '23', label: 'yrs' },
+  { num: '24', label: 'yrs' },
   { num: '10+', label: 'cloud' },
-  { num: '04', label: 'co' },
+  { num: '12', label: 'co' },
   { num: 'PY', label: 'base' },
 ];
 
