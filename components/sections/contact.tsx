@@ -25,7 +25,16 @@ export function Contact() {
           </h2>
           <p className="dim text-sm md:text-base leading-relaxed pretty max-w-xl">
             Open to early-stage advisory, infra-heavy contracts, and the occasional
-            seed cheque. Email is fastest; LinkedIn for slow conversations.
+            seed cheque.
+          </p>
+          <p className="dim text-sm md:text-base leading-relaxed pretty max-w-xl">
+            Also happy to compare notes on{' '}
+            <span className="text-[color:var(--t-fg)]">Paraguay residency</span>,{' '}
+            business structure, and personal finance for builders — I&apos;ve walked
+            that path and learned a few things worth sharing.
+          </p>
+          <p className="dim text-sm md:text-base leading-relaxed pretty max-w-xl">
+            Email is fastest; LinkedIn for slow conversations.
           </p>
         </div>
 

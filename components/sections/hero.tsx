@@ -21,6 +21,7 @@ export function Hero() {
  role      software engineer · founder · seed investor
  base      Asunción, Paraguay  `}<span className="dim">(GMT-3)</span>{`
  prior     BlackRock · Anaplan · Entelo · Moltin
+ asks      paraguay residency · biz structure · personal finance
  contact   `}<a
               href="mailto:hi@zot24.com"
               className="accent hover:underline underline-offset-4"

@@ -19,6 +19,16 @@
 - Advising founders and teams on platform engineering and delivery
 - Investing (including crypto) and optimizing for long-term optionality and freedom
 
+## 🌐 Geo-Arbitrage & Residency
+
+Walked the path from W-2 in San Francisco to building from Paraguay. Happy to compare notes with engineers and founders optimizing for the same:
+
+- 🇵🇾 **Paraguay residency** — cheap, fast, tax-friendly LATAM base
+- 🏗️ **Business structure** — entity choice for a remote / global engineer
+- 💼 **Personal finance & geo-arbitrage** — playing the long game across jurisdictions
+
+Not a sales pitch — just open conversations. Email me below.
+
 ## 🌍 Personal Brand
 
 My journey is built around a few core values:
