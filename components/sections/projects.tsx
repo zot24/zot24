@@ -1,98 +1,113 @@
-'use client';
+import type { Project } from '@/lib/projects';
 
-import { motion } from 'framer-motion';
-import { ExternalLink, Github } from 'lucide-react';
-import Image from 'next/image';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+interface ProjectsProps {
+  projects: Project[];
+}
 
-export function Projects() {
-  const projects = [
-    {
-      title: 'Infinity Photos',
-      description: 'A decentralized photo backup solution leveraging blockchain technology.',
-      image: 'https://images.unsplash.com/photo-1516542076529-1ea3854896f2',
-      technologies: ['Blockchain', 'Web3', 'React', 'Node.js'],
-      github: '#',
-      demo: '#',
-    },
-    {
-      title: 'Cloud Infrastructure Automation',
-      description: 'Automated deployment pipeline reducing environment creation time by 25%.',
-      image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa',
-      technologies: ['Terraform', 'AWS', 'Kubernetes', 'Docker'],
-      github: '#',
-      demo: '#',
-    },
-  ];
+export function Projects({ projects }: ProjectsProps) {
+  if (!projects || projects.length === 0) return null;
 
   return (
-    <section id="projects" className="py-24 bg-muted/50">
-      <div className="container px-4 md:px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="space-y-4 text-center"
-        >
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Featured Projects</h2>
-          <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-            Showcase of my recent work and technical achievements.
-          </p>
-        </motion.div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
-          {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-            >
-              <Card className="overflow-hidden">
-                <div className="relative aspect-video">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <CardHeader>
-                  <CardTitle>{project.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">{project.description}</p>
-                  <div className="flex flex-wrap gap-2 mt-4">
-                    {project.technologies.map((tech, techIndex) => (
-                      <span
-                        key={techIndex}
-                        className="px-2 py-1 text-xs rounded-full bg-primary/10 text-primary"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </CardContent>
-                <CardFooter className="gap-2">
-                  <Button variant="outline" size="sm" asChild>
-                    <a href={project.github} target="_blank" rel="noopener noreferrer">
-                      <Github className="mr-2 h-4 w-4" />
-                      GitHub
-                    </a>
-                  </Button>
-                  <Button variant="outline" size="sm" asChild>
-                    <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                      <ExternalLink className="mr-2 h-4 w-4" />
-                      Live Demo
-                    </a>
-                  </Button>
-                </CardFooter>
-              </Card>
-            </motion.div>
-          ))}
+    <section id="projects" className="max-w-5xl mx-auto px-6 md:px-10 py-20">
+      {/* Section header */}
+      <div className="mb-10">
+        <div className="text-sm md:text-base mb-2">
+          <span className="dimmer">$</span>{' '}
+          <span className="accent">projects</span>{' '}
+          <span className="dim">list --mine --status=active</span>
+          <span className="t-cursor" />
         </div>
+        <div className="dim text-xs select-none">
+          ── projects ──────────────────────────────────────────────────
+        </div>
+      </div>
+
+      <div className="space-y-4 t-stagger">
+        {projects.map((p, idx) => {
+          const num = String(idx + 1).padStart(2, '0');
+          return (
+            <article
+              key={p.slug}
+              className="t-card p-5 md:p-6 relative group"
+            >
+              {/* Stretched primary link — no nested anchors */}
+              {(p.url || p.github) && (
+                <a
+                  href={p.url || p.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute inset-0 z-10"
+                  aria-label={`${p.title} — ${p.url ? 'visit' : 'view source'}`}
+                />
+              )}
+
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 relative z-0">
+                <div className="space-y-2 flex-1 min-w-0">
+                  <div className="flex items-center gap-3 dim text-[0.72rem] uppercase tracking-widest">
+                    <span className="num-tab accent">{num}</span>
+                    <span className="dimmer">─</span>
+                    <span>{p.status ?? '—'}</span>
+                    {p.tags?.[0] && (
+                      <>
+                        <span className="dimmer">·</span>
+                        <span>{p.tags[0]}</span>
+                      </>
+                    )}
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-medium">
+                    <span className="dimmer">./</span>
+                    {p.title}
+                  </h3>
+                  <p className="text-sm md:text-base max-w-2xl">{p.tagline}</p>
+                  <p className="dim text-sm max-w-2xl leading-relaxed pt-1 pretty">
+                    {p.description}
+                  </p>
+                  {p.tags && p.tags.length > 1 && (
+                    <div className="flex flex-wrap gap-2 pt-2">
+                      {p.tags.slice(1).map((t) => (
+                        <span key={t} className="t-tag">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                <div className="flex flex-col items-start md:items-end gap-2 shrink-0 text-sm">
+                  {p.url && (
+                    <span className="accent">visit ↗</span>
+                  )}
+                  {p.github && p.url && (
+                    <a
+                      href={p.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="relative z-20 dim hover:text-[color:var(--t-fg)] transition-colors"
+                    >
+                      source ↗
+                    </a>
+                  )}
+                </div>
+              </div>
+            </article>
+          );
+        })}
+
+        {/* Placeholder rows for empty slots */}
+        {[1, 2].map((i) => (
+          <div
+            key={`empty-${i}`}
+            className="t-card border-dashed p-5 dim text-sm flex items-center justify-between"
+          >
+            <span>
+              <span className="num-tab accent mr-3">
+                {String(projects.length + i).padStart(2, '0')}
+              </span>
+              <span className="dimmer">─</span> awaiting next ship
+            </span>
+            <span className="dimmer text-xs">empty</span>
+          </div>
+        ))}
       </div>
     </section>
   );

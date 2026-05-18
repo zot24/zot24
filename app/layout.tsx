@@ -1,16 +1,29 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter, Outfit } from 'next/font/google';
+import { JetBrains_Mono, IBM_Plex_Serif } from 'next/font/google';
 import Script from 'next/script';
-import { Providers } from './providers';
 import { NavigationMenu } from '@/components/navigation-menu';
+import { NowStripe } from '@/components/now-stripe';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
-const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit' });
+const mono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '700'],
+  variable: '--font-mono',
+  display: 'swap',
+});
+
+const serif = IBM_Plex_Serif({
+  subsets: ['latin'],
+  weight: ['300', '400', '500'],
+  style: ['normal', 'italic'],
+  variable: '--font-serif',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
-  title: 'zot24 - Engineering Leader',
-  description: 'Engineering Leader and Developer',
+  title: 'zot24 — software engineer, founder, seed investor',
+  description:
+    '24 years writing software, the last decade building cloud platforms. Currently in Asunción, Paraguay.',
 };
 
 export default function RootLayout({
@@ -19,12 +32,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${outfit.variable} font-sans bg-background text-foreground antialiased selection:bg-cyan-500/30`}>
-        <Providers attribute="class" defaultTheme="dark" enableSystem>
-          <NavigationMenu />
-          {children}
-        </Providers>
+    <html lang="en">
+      <body className={`${mono.variable} ${serif.variable} t-crt relative`}>
+        <NavigationMenu />
+        <NowStripe />
+        {children}
         <Script
           src="https://umami.motty.io/script.js"
           data-website-id="c9e30775-03c2-4b26-bdbd-90006ac86727"

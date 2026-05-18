@@ -2,90 +2,357 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
+/* Terminal / Engineered — the one and only theme.
+   Mono-first, dense, README-feel.
 
-@media (prefers-color-scheme: dark) {
+   Palette tuned for long-form readability (Bringhurst, Ive-school):
+   - Warm-tinted darks read as "paper," not "TV off"
+   - Softer fg drops contrast from a fatiguing 17:1 to a still-AAA-compliant ~13:1
+   - Sub-perceptual at a glance; eye fatigue drops in 10+ min sessions
+*/
+@layer base {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --t-bg: #0b0a09;
+    --t-bg-rule: #181614;
+    --t-bg-elev: rgba(228, 224, 216, 0.02);
+    --t-fg: #dcd9d3;
+    --t-fg-dim: #8e8a82;
+    --t-fg-dimmer: #4d4a44;
+    --t-accent: #84ff00;
+    --t-accent-soft: rgba(132, 255, 0, 0.08);
+    --t-accent-glow: rgba(132, 255, 0, 0.18);
+    --t-warn: #ffb84d;
+    --t-danger: #ff4d4d;
+
+    /* shadcn-compat tokens (kept so existing primitives keep working) */
+    --background: var(--t-bg);
+    --foreground: var(--t-fg);
+    --card: var(--t-bg);
+    --card-foreground: var(--t-fg);
+    --popover: var(--t-bg);
+    --popover-foreground: var(--t-fg);
+    --primary: var(--t-accent);
+    --primary-foreground: var(--t-bg);
+    --secondary: var(--t-bg-rule);
+    --secondary-foreground: var(--t-fg);
+    --muted: var(--t-bg-rule);
+    --muted-foreground: var(--t-fg-dim);
+    --accent: var(--t-accent);
+    --accent-foreground: var(--t-bg);
+    --destructive: var(--t-danger);
+    --destructive-foreground: var(--t-fg);
+    --border: var(--t-bg-rule);
+    --input: var(--t-bg-rule);
+    --ring: var(--t-accent);
+    --radius: 0px;
   }
 }
 
 @layer base {
-  :root {
-    --background: 222 47% 95%; /* Clean Light Gray */
-    --foreground: 222 47% 10%; /* Deep Slate */
-
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 10%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 10%;
-
-    --primary: 199 89% 48%; /* Vibrant Cyan/Blue */
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222 47% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215 16% 47%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222 47% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 199 89% 48%;
-
-    --radius: 0.75rem;
+  html {
+    color-scheme: dark;
+    background: var(--t-bg);
+    /* Animate jump-to-section so scroll-spy can keep up.
+       Account for the sticky 44px nav + 28px NOW stripe (72px total)
+       so anchored headings don't land hidden under them. */
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
   }
 
-  .dark {
-    /* Premium Dark Theme */
-    --background: 224 71% 4%; /* Deep Midnight Blue */
-    --foreground: 210 40% 98%;
-
-    --card: 224 71% 7%; /* Slightly lighter midnight */
-    --card-foreground: 210 40% 98%;
-
-    --popover: 224 71% 7%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 199 89% 48%; /* Electric Cyan */
-    --primary-foreground: 222 47% 11.2%;
-
-    --secondary: 217 33% 17%; /* Muted Slate */
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
-
-    --accent: 199 89% 48%; /* Using Primary as accent for interactions */
-    --accent-foreground: 222 47% 11.2%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 199 89% 48%;
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
   }
-}
 
-@layer base {
-  * {
-    @apply border-border;
-  }
   body {
-    @apply bg-background text-foreground;
+    background: var(--t-bg);
+    color: var(--t-fg);
+    font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+    /* `cv11` opens lowercase `a/g/y` counters — reads slightly more humanist
+       at body sizes, better for long-form reading than the default. */
+    font-feature-settings: 'tnum' 1, 'ss01' 1, 'cv11' 1;
+    /* JetBrains Mono ships dense (for code). A hair of tracking opens it up
+       at body sizes without changing the look. */
+    letter-spacing: 0.003em;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
+
+  /* Site-wide prose readability defaults — safe on every paragraph and heading. */
+  p {
+    /* Chrome 117+: avoids orphan words on the last line of a paragraph.
+       Falls back gracefully on older browsers. */
+    text-wrap: pretty;
+    /* +0.1 over body line-height for paragraph copy specifically.
+       Headings, lists, and UI labels keep the tighter 1.55. */
+    line-height: 1.65;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    /* Chrome 114+: redistributes words across heading lines so the last line
+       isn't 80% empty. Visible on the hero quote and section headers. */
+    text-wrap: balance;
+    line-height: 1.2;
+  }
+
+  ::selection {
+    background: var(--t-accent);
+    color: var(--t-bg);
+  }
+
+  /* Custom scrollbar — terminal aesthetic */
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--t-bg);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--t-bg-rule);
+    border: 3px solid var(--t-bg);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--t-fg-dimmer);
+  }
+}
+
+/* Utility classes used across components */
+@layer utilities {
+  .font-mono-feature {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-feature-settings: 'tnum' 1, 'ss01' 1;
+  }
+  .font-serif-feature {
+    font-family: var(--font-serif), Georgia, 'Times New Roman', serif;
+    font-feature-settings: 'liga' 1, 'kern' 1, 'onum' 1;
+  }
+  .accent { color: var(--t-accent); }
+  .accent-glow { color: var(--t-accent); text-shadow: 0 0 18px var(--t-accent-glow); }
+  .dim { color: var(--t-fg-dim); }
+  .dimmer { color: var(--t-fg-dimmer); }
+  .num-tab { font-variant-numeric: tabular-nums; }
+  .balance { text-wrap: balance; }
+  .pretty { text-wrap: pretty; }
+}
+
+/* Card surface — sharp edges, hairline border */
+.t-card {
+  border: 1px solid var(--t-bg-rule);
+  background: var(--t-bg-elev);
+  transition-property: border-color, background-color, transform;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+.t-card:hover {
+  border-color: var(--t-accent);
+  background: var(--t-accent-soft);
+}
+
+/*
+ * Row surface — for list-style items (writing posts, blog list).
+ * Same hover timing + bg as `.t-card`, plus a transparent left-edge that
+ * lights up to the accent on hover. Mirrors the visual logic of cards
+ * (border-becomes-accent) without imposing a full border on a list row.
+ *
+ * No content shift: the left-edge is always reserved (transparent by
+ * default) so hovering doesn't push text.
+ */
+.t-row {
+  border-left: 2px solid transparent;
+  transition-property: background-color, border-left-color;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+.t-row:hover {
+  background: var(--t-accent-soft);
+  border-left-color: var(--t-accent);
+}
+
+/* Inline mono tag pill */
+.t-tag {
+  display: inline-block;
+  padding: 0 0.5em;
+  border: 1px solid var(--t-bg-rule);
+  color: var(--t-fg-dim);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  transition: color 200ms, border-color 200ms;
+  font-family: var(--font-mono), monospace;
+}
+.t-card:hover .t-tag {
+  color: var(--t-fg);
+  border-color: var(--t-fg-dim);
+}
+
+/* Blinking cursor — for prompts and the hero */
+@keyframes t-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+.t-cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.1em;
+  background: var(--t-accent);
+  vertical-align: -0.18em;
+  margin-left: 0.15em;
+  animation: t-blink 1.05s steps(1, end) infinite;
+  box-shadow: 0 0 12px var(--t-accent-glow);
+}
+
+/* Status pulse dot */
+@keyframes t-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.t-pulse { animation: t-pulse 2.4s ease-in-out infinite; }
+
+/* Subtle CRT scanlines — applied to <body> via class for atmosphere */
+.t-crt::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 3px,
+    rgba(255, 255, 255, 0.012) 3px,
+    rgba(255, 255, 255, 0.012) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Stagger entrance — apply to a container; children fade-up in order */
+@keyframes t-enter {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.t-stagger > * {
+  opacity: 0;
+  animation: t-enter 520ms cubic-bezier(0.2, 0, 0, 1) forwards;
+}
+.t-stagger > *:nth-child(1)  { animation-delay: 60ms; }
+.t-stagger > *:nth-child(2)  { animation-delay: 140ms; }
+.t-stagger > *:nth-child(3)  { animation-delay: 220ms; }
+.t-stagger > *:nth-child(4)  { animation-delay: 300ms; }
+.t-stagger > *:nth-child(5)  { animation-delay: 380ms; }
+.t-stagger > *:nth-child(6)  { animation-delay: 460ms; }
+.t-stagger > *:nth-child(7)  { animation-delay: 540ms; }
+.t-stagger > *:nth-child(8)  { animation-delay: 620ms; }
+.t-stagger > *:nth-child(9)  { animation-delay: 700ms; }
+.t-stagger > *:nth-child(10) { animation-delay: 780ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .t-stagger > *,
+  .t-cursor,
+  .t-pulse {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Press feedback for interactive elements per design-detail guide */
+.t-press {
+  transition-property: transform;
+  transition-duration: 100ms;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+.t-press:active { transform: scale(0.96); }
+
+/*
+ * When a section is wrapped in a TerminalFrame, override its solo-mode
+ * padding/margins so the frame's chrome carries the visual weight. The
+ * inner section's `max-w-5xl mx-auto` is also collapsed since the frame
+ * already constrains width.
+ *
+ * Padding scale:
+ *   mobile  → 1rem  horizontal · 1.5rem vertical   (tight, phone-native)
+ *   md+     → 2rem  horizontal · 2.5rem vertical   (still cozy in a frame)
+ */
+.terminal-pane-body > section,
+.terminal-pane-body > main > section {
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding: 1.5rem 1rem !important;
+  scroll-margin-top: 6rem !important; /* matches frame's scroll-mt-24 anchor target */
+}
+
+@media (min-width: 768px) {
+  .terminal-pane-body > section,
+  .terminal-pane-body > main > section {
+    padding: 2.5rem 2rem !important;
+  }
+}
+
+/*
+ * Smooth minimize/expand for terminal panes. The CSS grid trick gives a
+ * height transition that handles dynamic content height without JS
+ * measurement. The inner `min-h-0` allows the row to collapse to 0fr.
+ */
+.terminal-pane-collapser {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows 220ms cubic-bezier(0.2, 0, 0, 1);
+}
+.terminal-pane-collapser[data-minimized='true'] {
+  grid-template-rows: 0fr;
+}
+.terminal-pane-collapser > .terminal-pane-body {
+  overflow: hidden;
+}
+
+/* ---- Markdown prose container — long-form readability ---- */
+
+/* Bringhurst's sweet spot: 45–75ch per line. The blog post page is already
+   max-w-3xl (~48rem ≈ 80ch in mono), but capping the prose elements at 70ch
+   prevents the eye from losing its place at line-wrap. Tables, code blocks,
+   and figures stay full-width. */
+.prose-t p,
+.prose-t ul,
+.prose-t ol,
+.prose-t blockquote {
+  max-width: 70ch;
+}
+
+.prose-t p {
+  /* Chrome 117+ avoids orphans (single word on the last line). */
+  text-wrap: pretty;
+  /* +0.2em over the default — separates ideas without feeling sparse. */
+  margin: 1.1em 0;
+  line-height: 1.75; /* +0.05 over body line-height for sustained reading */
+}
+
+.prose-t h2,
+.prose-t h3,
+.prose-t h4 {
+  /* Headings stack tighter than body — visually communicates "one unit." */
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+/* Code blocks inside prose ignore the prose 70ch cap. */
+.prose-t pre {
+  max-width: none;
+}
+
+/* Markdown prose: unordered list items get a terminal arrow marker */
+.prose-t-ul > li {
+  position: relative;
+  padding-left: 1.6rem;
+  margin: 0.4em 0;
+}
+.prose-t-ul > li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--t-accent);
+}
+.prose-t-ul > li > p {
+  margin: 0;
 }
