@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import profileData from '@/content/profile.json';
+import { ReferenceWindow } from '@/components/reference-window';
 
 interface Testimonial {
   name: string;
@@ -21,6 +21,10 @@ interface Experience {
 function shortPeriod(period: string): string {
   // "Apr 2023 - Present" → "apr 2023 — present"
   return period.toLowerCase().replace(/\s*-\s*/g, ' — ');
+}
+
+function companyPath(company: string): string {
+  return `~/refs/${company.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
 }
 
 export function Experience() {
@@ -70,6 +74,12 @@ export function Experience() {
                   <span className="text-[color:var(--t-fg)]">{exp.title}</span>{' '}
                   <span className="dim">@</span>{' '}
                   <span className="accent">{exp.company}</span>
+                  {exp.testimonials && exp.testimonials.length > 0 && (
+                    <ReferenceWindow
+                      path={companyPath(exp.company)}
+                      testimonials={exp.testimonials}
+                    />
+                  )}
                 </div>
               </div>
 
@@ -90,38 +100,6 @@ export function Experience() {
                     <span key={tech} className="t-tag">
                       {tech}
                     </span>
-                  ))}
-                </div>
-              )}
-
-              {exp.testimonials && exp.testimonials.length > 0 && (
-                <div className="mt-5 border-l border-[color:var(--t-accent)]/40 pl-4 space-y-3">
-                  {exp.testimonials.map((t, i) => (
-                    <figure key={i} className="text-sm space-y-2">
-                      <blockquote className="font-serif-feature italic text-[color:var(--t-fg)]/90 leading-relaxed pretty">
-                        “{t.text}”
-                      </blockquote>
-                      <figcaption className="flex items-center gap-2 text-[0.72rem] uppercase tracking-widest dim">
-                        {t.image ? (
-                          <span className="relative inline-block w-5 h-5 rounded-full overflow-hidden ring-1 ring-[color:var(--t-bg-rule)]">
-                            <Image
-                              src={t.image}
-                              alt={t.name}
-                              fill
-                              className="object-cover"
-                              sizes="20px"
-                            />
-                          </span>
-                        ) : (
-                          <span className="accent">—</span>
-                        )}
-                        <span className="text-[color:var(--t-fg)]/90">
-                          {t.name}
-                        </span>
-                        <span className="dimmer">·</span>
-                        <span>{t.role.toLowerCase()}</span>
-                      </figcaption>
-                    </figure>
                   ))}
                 </div>
               )}

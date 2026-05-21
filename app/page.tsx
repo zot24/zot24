@@ -8,14 +8,66 @@ import { BootLoader } from '@/components/boot-loader';
 import { getAllPosts } from '@/lib/blog';
 import { getAllProjects } from '@/lib/projects';
 import profileData from '@/content/profile.json';
+import { site } from '@/lib/site';
 
 export default function Home() {
   const posts = getAllPosts().slice(0, 3);
   const projects = getAllProjects();
   const workCount = profileData.experience?.length ?? 0;
 
+  // JSON-LD: Person + WebSite. Person gets rich knowledge-graph results
+  // in search; WebSite enables sitelinks search box and identifies the
+  // canonical site. Both are also consumed by some LLM crawlers.
+  const personSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: site.author.name,
+    url: site.url,
+    email: `mailto:${site.author.email}`,
+    jobTitle: 'Software Engineer · Founder · Seed Investor',
+    description: profileData.summary,
+    image: `${site.url}/images/profile.jpg`,
+    sameAs: [
+      site.author.github,
+      site.author.twitter,
+      site.author.linkedin,
+    ],
+    knowsAbout: [
+      'Cloud platform engineering',
+      'Infrastructure as Code',
+      'Kubernetes',
+      'Rust',
+      'Go',
+      'Agentic CLI tools',
+      'AI agents',
+      'Paraguay residency',
+      'Geo-arbitrage',
+    ],
+    worksFor: projects.map((p) => ({
+      '@type': 'Organization',
+      name: p.title,
+      url: p.url || p.github,
+    })),
+  };
+
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: site.name,
+    url: site.url,
+    author: { '@type': 'Person', name: site.author.name },
+  };
+
   return (
     <main className="py-4 md:py-10">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
       <BootLoader />
 
       <TerminalFrame id="home" path="~" meta="zot24 v23.05.17">
