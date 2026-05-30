@@ -34,6 +34,14 @@ export function GET() {
   );
   lines.push('');
 
+  // Studio
+  lines.push('## Studio');
+  lines.push('');
+  lines.push(
+    `- [${site.studio.name}](${site.studio.url}): ${site.studio.description}. Where the professional engineering work happens. zot24 is the principal.`
+  );
+  lines.push('');
+
   // Projects
   if (projects.length > 0) {
     lines.push('## Projects');

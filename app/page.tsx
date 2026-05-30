@@ -36,6 +36,10 @@ export default function Home() {
       'Cloud platform engineering',
       'Infrastructure as Code',
       'Kubernetes',
+      'Terraform',
+      'Observability',
+      'Prometheus',
+      'Grafana',
       'Rust',
       'Go',
       'Agentic CLI tools',
@@ -43,11 +47,19 @@ export default function Home() {
       'Paraguay residency',
       'Geo-arbitrage',
     ],
-    worksFor: projects.map((p) => ({
-      '@type': 'Organization',
-      name: p.title,
-      url: p.url || p.github,
-    })),
+    worksFor: [
+      {
+        '@type': 'Organization',
+        name: site.studio.name,
+        url: site.studio.url,
+        description: site.studio.description,
+      },
+      ...projects.map((p) => ({
+        '@type': 'Organization',
+        name: p.title,
+        url: p.url || p.github,
+      })),
+    ],
   };
 
   const websiteSchema = {

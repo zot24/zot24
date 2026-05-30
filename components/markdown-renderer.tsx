@@ -32,7 +32,10 @@ export function MarkdownRenderer({ content }: MarkdownRendererProps) {
             />
           ),
           p: ({ node, ...props }) => (
-            <p className="my-5 leading-relaxed pretty" {...props} />
+            // line-height intentionally not set here — defers to
+            // .prose-t p { line-height: 1.75 } in globals.css for
+            // long-form readability tuning.
+            <p className="my-5 pretty" {...props} />
           ),
           a: ({ node, ...props }) => (
             <a
@@ -76,7 +79,7 @@ export function MarkdownRenderer({ content }: MarkdownRendererProps) {
             }
             return (
               <code
-                className="px-1.5 py-0.5 bg-[color:var(--t-accent-soft)] text-[color:var(--t-accent)] text-[0.92em]"
+                className="px-1.5 py-0.5 bg-[color:var(--t-accent-soft)] text-[color:var(--t-accent)] text-[0.95em]"
                 {...props}
               >
                 {children}
@@ -85,7 +88,7 @@ export function MarkdownRenderer({ content }: MarkdownRendererProps) {
           },
           pre: ({ node, ...props }) => (
             <pre
-              className="my-6 p-4 border border-[color:var(--t-bg-rule)] bg-[color:var(--t-bg-elev)] overflow-x-auto text-sm leading-relaxed"
+              className="my-6 p-4 border border-[color:var(--t-bg-rule)] bg-[color:var(--t-bg-elev)] overflow-x-auto text-[0.9375rem] leading-[1.7]"
               {...props}
             />
           ),

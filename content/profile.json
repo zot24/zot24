@@ -13,6 +13,30 @@
     ],
     "experience": [
         {
+            "title": "Founder & Principal",
+            "company": "Motty",
+            "period": "Sep 2012 - Present",
+            "location": "Remote — currently Asunción, Paraguay",
+            "highlights": [
+                "Founded and run Motty, a boutique software studio. Engagements limited to one or two at a time — long-running, deep, often multi-year exclusive.",
+                "Custom application development (TypeScript, Rust, Go), cloud and infrastructure engineering (Kubernetes, Terraform, AWS, GCP), and self-hosted observability stacks (Prometheus, Thanos, Grafana, custom AWS metrics collectors).",
+                "Technical consulting, system design, and engineering augmentation for founders and engineering leaders.",
+                "100% client retention to date across ~15 engagements."
+            ],
+            "technologies": [
+                "TypeScript",
+                "Rust",
+                "Go",
+                "Kubernetes",
+                "Terraform",
+                "AWS",
+                "GCP",
+                "Prometheus",
+                "Thanos",
+                "Grafana"
+            ]
+        },
+        {
             "title": "Strategic Advisor & Seed Investor",
             "company": "Smartloop",
             "period": "Apr 2023 - Present",

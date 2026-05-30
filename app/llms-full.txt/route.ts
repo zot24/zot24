@@ -50,6 +50,19 @@ export function GET() {
   if (now.updated) out.push(`- Updated: ${now.updated}`);
   out.push('');
 
+  // ─── Studio
+  out.push('## Studio');
+  out.push('');
+  out.push(`### ${site.studio.name} — ${site.studio.description}`);
+  out.push('');
+  out.push(
+    `zot24 is the principal at ${site.studio.name} (${site.studio.url}) — a boutique software studio offering custom application development (TypeScript, Rust, Go), cloud and infrastructure engineering (Kubernetes, Terraform, AWS, GCP), observability stacks (Prometheus, Thanos, Grafana), technical consulting, and team augmentation. Engagements are limited to one or two at a time. Operating since 2012.`
+  );
+  out.push('');
+  out.push(`**URL:** ${site.studio.url}`);
+  out.push(`**llms.txt:** ${site.studio.url}/llms.txt`);
+  out.push('');
+
   // ─── Projects
   if (projects.length > 0) {
     out.push('## Projects');
