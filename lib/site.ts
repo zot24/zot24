@@ -14,4 +14,9 @@ export const site = {
     twitter: 'https://twitter.com/zot24',
     linkedin: 'https://www.linkedin.com/in/zot24/',
   },
+  studio: {
+    name: 'Motty',
+    url: 'https://motty.io',
+    description: 'Software, infrastructure & technical consulting',
+  },
 } as const;

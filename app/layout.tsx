@@ -99,6 +99,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        {/* rel="me" links — IndieAuth / identity graph. Reciprocates the
+            founder.sameAs block on motty.io and lets search engines
+            and LLMs treat motty.io + zot24 + socials as one identity. */}
+        <link rel="me" href={site.studio.url} />
+        <link rel="me" href={site.author.github} />
+        <link rel="me" href={site.author.linkedin} />
+        <link rel="me" href={site.author.twitter} />
+        <link rel="me" href={`mailto:${site.author.email}`} />
+      </head>
       <body className={`${mono.variable} ${serif.variable} t-crt relative`}>
         <NavigationMenu />
         <NowStripe />

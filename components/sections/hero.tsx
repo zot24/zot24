@@ -1,4 +1,5 @@
 import { SocialLinks } from '@/components/social-links';
+import { site } from '@/lib/site';
 
 const stats = [
   { num: '24', label: 'years engineering' },
@@ -19,6 +20,12 @@ export function Hero() {
           <pre className="m-0 text-sm md:text-base leading-relaxed font-mono-feature whitespace-pre-wrap">
 {` name      `}<span className="accent">zot24</span>{`
  role      software engineer · founder · seed investor
+ studio    `}<a
+              href={site.studio.url}
+              target="_blank"
+              rel="me noopener noreferrer"
+              className="accent hover:underline underline-offset-4"
+            >motty.io</a>{` · `}<span className="dim">{site.studio.description.toLowerCase()}</span>{`
  base      Asunción, Paraguay  `}<span className="dim">(GMT-3)</span>{`
  prior     BlackRock · Anaplan · Entelo · Moltin
  asks      paraguay residency · biz structure · personal finance
