@@ -9,7 +9,7 @@
 </pre>
 </div>
 
-> **Engineering Leader | Cloud Infrastructure Architect | Founder, Motty**
+> **Engineering Leader | Cloud Infrastructure Architect | Founder & Seed Investor**
 
 24 years as a software engineer, including 10 years building cloud platforms and scalable infrastructure. Entrepreneur and seed investor, currently based in Paraguay after years of traveling globally.
 
