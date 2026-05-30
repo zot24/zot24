@@ -72,7 +72,7 @@ With 24 years of experience as a software engineer (including 10 building cloud 
 ## 🔗 Connect
 
 - 🌐: <https://zot24.com>
-- 𝕏: <https://twitter.com/zot24>
+- 𝕏: <https://x.com/zot24>
 - 📧: <hi@zot24.com>
 
 ## 💬 Philosophy

@@ -15,7 +15,7 @@ export function Hero() {
         {/* Identity block */}
         <div className="space-y-1 mb-12">
           <div className="dim text-xs">
-            ┌─ identity ──────────────────────────────────┐
+            ┌─ identity ───────────────────────────────────────────────┐
           </div>
           <pre className="m-0 text-sm md:text-base leading-relaxed font-mono-feature whitespace-pre-wrap">
 {` name      `}<span className="accent">zot24</span>{`
@@ -35,7 +35,7 @@ export function Hero() {
             >hi@zot24.com</a>
           </pre>
           <div className="dim text-xs">
-            └─────────────────────────────────────────────┘
+            └─────────────────────────────────────────────────────────┘
           </div>
         </div>
 

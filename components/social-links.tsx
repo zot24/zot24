@@ -30,7 +30,7 @@ const socialLinks: Array<{
   {
     name: 'Twitter',
     icon: Twitter,
-    href: 'https://twitter.com/zot24',
+    href: 'https://x.com/zot24',
     handle: '@zot24',
     platform: 'twitter',
     external: true,
