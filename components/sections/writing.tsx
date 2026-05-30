@@ -31,14 +31,14 @@ export function Writing({ posts }: WritingProps) {
         </Link>
       </div>
 
-      <ul className="divide-y divide-[color:var(--t-bg-rule)] border-y border-[color:var(--t-bg-rule)] t-stagger">
+      <ul className="space-y-3 md:space-y-4 t-stagger">
         {posts.map((post) => {
           const isExternal = !!post.externalLink;
           const href = post.externalLink || `/blog/${post.slug}`;
           const dateStr = format(new Date(post.date), 'yyyy-MM-dd');
 
           const inner = (
-            <div className="t-row group relative py-5 px-3 md:px-5 -mx-2 md:-mx-4">
+            <article className="t-card group p-4 md:p-5 relative">
               <div className="grid grid-cols-12 gap-4 items-baseline">
                 <time
                   dateTime={post.date}
@@ -47,7 +47,7 @@ export function Writing({ posts }: WritingProps) {
                   {dateStr}
                 </time>
                 <div className="col-span-12 md:col-span-8 space-y-1">
-                  <h3 className="text-base md:text-lg group-hover:text-[color:var(--t-accent)] transition-colors">
+                  <h3 className="text-base md:text-lg">
                     {post.title}
                     {isExternal && <span className="dim ml-2 text-xs">↗</span>}
                   </h3>
@@ -63,7 +63,7 @@ export function Writing({ posts }: WritingProps) {
                     : post.tags?.[0] ?? '—'}
                 </div>
               </div>
-            </div>
+            </article>
           );
 
           return (
