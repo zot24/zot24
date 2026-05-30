@@ -114,7 +114,7 @@ export default function RootLayout({
         <NowStripe />
         {children}
         <Script
-          src="https://umami.motty.io/script.js"
+          src="https://umami.zot24.com/script.js"
           data-website-id="4a796b97-aafc-4c14-8965-c9bb2c3df511"
           strategy="afterInteractive"
         />
