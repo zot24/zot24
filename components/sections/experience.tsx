@@ -27,6 +27,50 @@ function companyPath(company: string): string {
   return `~/refs/${company.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
 }
 
+const MONTHS: Record<string, number> = {
+  jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5,
+  jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11,
+};
+
+/**
+ * Compute "Xy Ym" duration from a period string like "Apr 2023 - Present"
+ * or "Nov 2019 - Jan 2022". Months are inclusive of the start month and
+ * exclusive of the end month, matching how LinkedIn counts tenure.
+ * For "Present" entries, evaluated at render/build time.
+ */
+function computeDuration(period: string): string {
+  const match = period.match(
+    /^(\w{3})\s+(\d{4})\s*-\s*(?:Present|(\w{3})\s+(\d{4}))$/i
+  );
+  if (!match) return '';
+
+  const startMonth = MONTHS[match[1].toLowerCase()];
+  const startYear = parseInt(match[2], 10);
+  if (startMonth === undefined || isNaN(startYear)) return '';
+
+  let endMonth: number;
+  let endYear: number;
+  if (match[3] && match[4]) {
+    endMonth = MONTHS[match[3].toLowerCase()];
+    endYear = parseInt(match[4], 10);
+    if (endMonth === undefined || isNaN(endYear)) return '';
+  } else {
+    const now = new Date();
+    endMonth = now.getMonth();
+    endYear = now.getFullYear();
+  }
+
+  const totalMonths = (endYear - startYear) * 12 + (endMonth - startMonth) + 1;
+  if (totalMonths < 1) return '';
+
+  const years = Math.floor(totalMonths / 12);
+  const months = totalMonths % 12;
+
+  if (years > 0 && months > 0) return `${years}y ${months}m`;
+  if (years > 0) return `${years}y`;
+  return `${months}m`;
+}
+
 function isOngoing(period: string): boolean {
   return /present/i.test(period);
 }
@@ -38,6 +82,9 @@ function ExperienceItem({ exp }: { exp: Experience }) {
       <div className="col-span-12 md:col-span-3 md:pt-1">
         <div className="text-[0.7rem] uppercase tracking-widest dim num-tab">
           {shortPeriod(exp.period)}
+          {computeDuration(exp.period) && (
+            <span className="dimmer ml-2">{computeDuration(exp.period)}</span>
+          )}
         </div>
         <div className="mt-1 text-[0.7rem] uppercase tracking-widest dimmer">
           {exp.location.toLowerCase()}
