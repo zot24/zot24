@@ -53,8 +53,8 @@
     color-scheme: dark;
     background: var(--t-bg);
     /* Animate jump-to-section so scroll-spy can keep up.
-       Account for the sticky 44px nav + 28px NOW stripe (72px total)
-       so anchored headings don't land hidden under them. */
+       Account for the sticky 44px nav with comfortable headroom
+       so anchored headings don't land hidden under it. */
     scroll-behavior: smooth;
     scroll-padding-top: 5rem;
   }

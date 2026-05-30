@@ -46,7 +46,7 @@ export function Writing({ posts }: WritingProps) {
                 >
                   {dateStr}
                 </time>
-                <div className="col-span-12 md:col-span-8 space-y-1">
+                <div className="col-span-12 md:col-span-8 space-y-1.5">
                   <h3 className="text-base md:text-lg">
                     {post.title}
                     {isExternal && <span className="dim ml-2 text-xs">↗</span>}
@@ -56,11 +56,18 @@ export function Writing({ posts }: WritingProps) {
                       {post.description}
                     </p>
                   )}
+                  {post.tags && post.tags.length > 0 && (
+                    <div className="flex flex-wrap gap-2 pt-2">
+                      {post.tags.map((t) => (
+                        <span key={t} className="t-tag">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </div>
                 <div className="col-span-12 md:col-span-2 md:text-right text-[0.7rem] uppercase tracking-widest dimmer">
-                  {post.platform === 'X'
-                    ? 'thread'
-                    : post.tags?.[0] ?? '—'}
+                  {post.platform === 'X' ? 'thread' : 'post'}
                 </div>
               </div>
             </article>
