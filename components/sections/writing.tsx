@@ -39,25 +39,19 @@ export function Writing({ posts }: WritingProps) {
 
           const inner = (
             <article className="t-card group p-4 md:p-5 relative">
-              <div className="grid grid-cols-12 gap-4 items-baseline">
-                <time
-                  dateTime={post.date}
-                  className="col-span-12 md:col-span-2 text-[0.72rem] uppercase tracking-widest dim num-tab"
-                >
-                  {dateStr}
-                </time>
-                <div className="col-span-12 md:col-span-8 space-y-1.5">
-                  <h3 className="text-base md:text-lg">
+              <div className="grid grid-cols-12 gap-4 items-start">
+                <div className="col-span-12 md:col-span-10 space-y-2">
+                  <h3 className="text-lg md:text-xl font-medium leading-tight">
                     {post.title}
                     {isExternal && <span className="dim ml-2 text-xs">↗</span>}
                   </h3>
                   {post.description && (
-                    <p className="dim text-sm leading-relaxed pretty">
+                    <p className="dim text-[0.95rem] leading-relaxed pretty">
                       {post.description}
                     </p>
                   )}
                   {post.tags && post.tags.length > 0 && (
-                    <div className="flex flex-wrap gap-2 pt-2">
+                    <div className="flex flex-wrap gap-2 pt-1">
                       {post.tags.map((t) => (
                         <span key={t} className="t-tag">
                           {t}
@@ -66,8 +60,16 @@ export function Writing({ posts }: WritingProps) {
                     </div>
                   )}
                 </div>
-                <div className="col-span-12 md:col-span-2 md:text-right text-[0.7rem] uppercase tracking-widest dimmer">
-                  {post.platform === 'X' ? 'thread' : 'post'}
+                <div className="col-span-12 md:col-span-2 md:text-right space-y-1.5">
+                  <div className="text-[0.7rem] uppercase tracking-widest dimmer">
+                    {post.platform === 'X' ? 'thread' : 'post'}
+                  </div>
+                  <time
+                    dateTime={post.date}
+                    className="block text-[0.7rem] uppercase tracking-widest dim num-tab"
+                  >
+                    {dateStr}
+                  </time>
                 </div>
               </div>
             </article>
