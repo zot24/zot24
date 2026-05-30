@@ -115,7 +115,7 @@ export default function RootLayout({
         {children}
         <Script
           src="https://umami.motty.io/script.js"
-          data-website-id="c9e30775-03c2-4b26-bdbd-90006ac86727"
+          data-website-id="4a796b97-aafc-4c14-8965-c9bb2c3df511"
           strategy="afterInteractive"
         />
       </body>
