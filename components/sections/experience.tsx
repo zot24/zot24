@@ -1,5 +1,6 @@
 import profileData from '@/content/profile.json';
 import { ReferenceWindow } from '@/components/reference-window';
+import { site } from '@/lib/site';
 
 interface Testimonial {
   name: string;
@@ -187,6 +188,18 @@ export function Experience() {
                 <ExperienceItem key={`past-${index}`} exp={exp} />
               ))}
             </ol>
+            <p className="mt-10 text-xs dimmer italic pretty">
+              Pre-2013 roles omitted for brevity — see{' '}
+              <a
+                href={site.author.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-4 hover:text-[color:var(--t-fg-dim)] transition-colors"
+              >
+                LinkedIn
+              </a>{' '}
+              for the full chronology.
+            </p>
           </div>
         )}
       </div>
