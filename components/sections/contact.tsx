@@ -34,7 +34,7 @@ export function Contact() {
             that path and learned a few things worth sharing.
           </p>
           <p className="dimmer text-sm md:text-base leading-relaxed pretty max-w-xl">
-            Email is fastest; LinkedIn for slow conversations.
+            X Chat is fastest; email for longer threads.
           </p>
         </div>
 
