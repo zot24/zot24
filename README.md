@@ -9,7 +9,7 @@
 </pre>
 </div>
 
-> **Engineering Leader | Cloud Infrastructure Architect | Building Freedom Through Technology**
+> **Engineering Leader | Cloud Infrastructure Architect | Founder, Motty**
 
 24 years as a software engineer, including 10 years building cloud platforms and scalable infrastructure. Entrepreneur and seed investor, currently based in Paraguay after years of traveling globally.
 
@@ -50,6 +50,12 @@ With 24 years of experience as a software engineer (including 10 building cloud 
 - **Observability**: Prometheus, Grafana, Thanos
 - **CI/CD**: Build systems, pipelines, release automation
 - **Languages**: Go, Python, PHP, Rust
+
+## 🏛️ Studio
+
+I run [**Motty**](https://motty.io) — a boutique software studio, est. 2012. Custom application development (TypeScript, Rust, Go), cloud and infrastructure engineering (Kubernetes, Terraform, AWS, GCP), self-hosted observability (Prometheus, Thanos, Grafana), and technical consulting. One or two engagements at a time, often multi-year exclusive.
+
+→ [motty.io](https://motty.io)
 
 ## 🚀 Currently Building
 
