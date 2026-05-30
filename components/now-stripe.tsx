@@ -23,7 +23,7 @@ export function NowStripe() {
 
   return (
     <div
-      className="sticky top-11 z-40 bg-[color:var(--t-bg-rule)] shadow-[0_1px_0_rgba(255,255,255,0.05)]"
+      className="sticky top-11 z-40 bg-[color:var(--t-bg)] border-b border-[rgba(255,255,255,0.08)]"
       title={title}
       aria-label={`Currently shipping: ${now.now}`}
     >

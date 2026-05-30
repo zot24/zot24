@@ -121,7 +121,7 @@ export function NavigationMenu() {
   }
 
   return (
-    <header className="sticky top-0 z-50 bg-[color:var(--t-bg-rule)] shadow-[inset_0_-1px_0_rgba(0,0,0,0.55)]">
+    <header className="sticky top-0 z-50 bg-[color:var(--t-bg)]">
       <div className="max-w-5xl mx-auto px-6 md:px-10 h-11 flex items-center justify-between text-[0.72rem] uppercase tracking-widest">
         <div className="flex items-center gap-3 dim">
           <span className="inline-block w-1.5 h-1.5 rounded-full bg-[color:var(--t-accent)] t-pulse" />
