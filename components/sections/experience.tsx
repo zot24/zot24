@@ -161,21 +161,16 @@ export function Experience() {
   return (
     <section id="work" className="max-w-5xl mx-auto px-6 md:px-10 py-20">
       {/* Section header */}
-      <div className="mb-12">
-        <div className="text-sm md:text-base mb-2">
-          <span className="dimmer">$</span>{' '}
-          <span className="accent">history</span>{' '}
-          <span className="dim">--all</span>
-        </div>
-        <div className="dim text-xs select-none">
-          ── work ──────────────────────────────────────────────────────
-        </div>
+      <div className="text-sm md:text-base mb-10">
+        <span className="dimmer">$</span>{' '}
+        <span className="accent">history</span>{' '}
+        <span className="dim">--all</span>
       </div>
 
       <div className="t-stagger space-y-16">
         {current.length > 0 && (
           <div>
-            <GroupHeader label="current · ongoing" />
+            <GroupHeader label="work · current ongoing" />
             <ol className="space-y-12">
               {current.map((exp, index) => (
                 <ExperienceItem key={`current-${index}`} exp={exp} />
@@ -186,7 +181,7 @@ export function Experience() {
 
         {past.length > 0 && (
           <div>
-            <GroupHeader label="past" />
+            <GroupHeader label="work · past" />
             <ol className="space-y-12">
               {past.map((exp, index) => (
                 <ExperienceItem key={`past-${index}`} exp={exp} />
