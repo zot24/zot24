@@ -53,8 +53,8 @@
     color-scheme: dark;
     background: var(--t-bg);
     /* Animate jump-to-section so scroll-spy can keep up.
-       Account for the sticky 44px nav with comfortable headroom
-       so anchored headings don't land hidden under it. */
+       Account for the sticky 44px nav + 24px broadcast stripe (68px total)
+       so anchored headings don't land hidden under the chrome. */
     scroll-behavior: smooth;
     scroll-padding-top: 5rem;
   }
@@ -209,6 +209,22 @@
   50% { opacity: 0.4; }
 }
 .t-pulse { animation: t-pulse 2.4s ease-in-out infinite; }
+
+/* CRT broadcast — green phosphor glow on all text within (used by the
+   NowStripe to look like an old TV signaling bar). Subtle enough at small
+   sizes that text stays crisp; combined with the bar's faint green wash
+   and pulsing ▸ indicator. */
+.now-broadcast {
+  text-shadow:
+    0 0 6px rgba(132, 255, 0, 0.35),
+    0 0 14px rgba(132, 255, 0, 0.12);
+}
+.now-broadcast a { text-decoration: none; }
+.now-broadcast a:hover {
+  text-shadow:
+    0 0 8px rgba(132, 255, 0, 0.55),
+    0 0 18px rgba(132, 255, 0, 0.2);
+}
 
 /* Subtle CRT scanlines — applied to <body> via class for atmosphere */
 .t-crt::before {

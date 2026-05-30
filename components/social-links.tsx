@@ -44,7 +44,7 @@ const socialLinks: Array<{
     external: true,
   },
   {
-    name: 'X',
+    name: 'X / Twitter',
     icon: XIcon,
     href: 'https://x.com/zot24',
     handle: '@zot24',
@@ -73,7 +73,7 @@ export function SocialLinks({ variant = 'inline' }: SocialLinksProps) {
         {socialLinks.map((link) => (
           <li key={link.name} className="flex items-center gap-3">
             <link.icon className="w-3.5 h-3.5 dim shrink-0" aria-hidden="true" />
-            <span className="dim text-[0.72rem] uppercase tracking-widest w-16 shrink-0">
+            <span className="dim text-[0.72rem] uppercase tracking-widest w-24 shrink-0">
               {link.name}
             </span>
             <a
