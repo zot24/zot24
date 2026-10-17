@@ -9,7 +9,7 @@
 </pre>
 </div>
 
-> **Engineering Leader | Cloud Infrastructure Architect | Founder & Seed Investor**
+> **Product Founder | AI & Agentic Engineering | Cloud Infrastructure Architect**
 
 24 years as a software engineer, including 10 years building cloud platforms and scalable infrastructure. Entrepreneur and seed investor, currently based in Paraguay after years of traveling globally.
 
@@ -49,7 +49,21 @@ With 24 years of experience as a software engineer (including 10 building cloud 
 - **Container Orchestration**: Kubernetes, Docker
 - **Observability**: Prometheus, Grafana, Thanos
 - **CI/CD**: Build systems, pipelines, release automation
-- **Languages**: Go, Python, PHP, Rust
+- **Languages**: TypeScript, Rust, Go, Python
+
+## 🤖 How I build with AI
+
+- Agents run in herdr panes and git worktrees, with one herdr workspace per repo.
+- Public repos built this way include [zskills](https://github.com/zot24/zskills), [mercator](https://github.com/zot24/mercator), [umami-cli](https://github.com/zot24/umami-cli), and [umbrel-apps](https://github.com/zot24/umbrel-apps).
+- The check-first workflow starts from a spec and shell-command checks.
+- A second agent attacks the checks before any code exists.
+- Grok writes code by default.
+- Claude Code or Codex reviews.
+- A Codex reviewer is live.
+- The author and the reviewer never share a model provider.
+- pi runs Grok models, so pi never reviews Grok's work.
+- An append-only JSONL decision log holds 235 entries.
+- Lessons become rules in a local llm-wiki.
 
 ## 🏛️ Studio
 
@@ -74,12 +88,15 @@ I run [**Motty**](https://motty.io) — a boutique software studio, est. 2012. C
 
 ![AWS](https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white)
 ![GCP](https://img.shields.io/badge/Google_Cloud-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white)
-![Azure](https://img.shields.io/badge/Azure-0078D4?style=for-the-badge&logo=microsoft-azure&logoColor=white)
 ![Kubernetes](https://img.shields.io/badge/kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)
 ![Terraform](https://img.shields.io/badge/Terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=white)
 ![Go](https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white)
 ![Rust](https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![AI Agents](https://img.shields.io/badge/AI_Agents-111827?style=for-the-badge)
+![MCP](https://img.shields.io/badge/MCP-000000?style=for-the-badge&logo=modelcontextprotocol&logoColor=white)
 
 ## 🔗 Connect
 
